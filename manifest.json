@@ -3,11 +3,6 @@
   "version": "1.0",
   "description": "Plugin for Forces FoW builder to replace point with competitive ones",
   "permissions": ["activeTab", "declarativeContent", "storage"],
-  "options_page": "options.html",
-  "background": {
-    "scripts": ["background.js"],
-    "persistent": false
-  },
   "content_scripts": [
     {
       "matches": ["https://forces.flamesofwar.com/UnitDiagram/*"],
@@ -48,15 +43,6 @@
       ]
     }
   ],
-  "page_action": {
-    "default_popup": "popup.html",
-    "default_icon": {
-      "16": "images/16 12.png",
-      "32": "images/32 12.png",
-      "48": "images/48 12.png",
-      "128": "images/128 12.png"
-    }
-  },
   "icons": {
     "16": "images/16 12.png",
     "32": "images/32 12.png",
