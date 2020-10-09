@@ -29,11 +29,11 @@ function overrideUnitPoints() {
     })
         .filter(choise => {
             let text = pointsRegexp.exec(choise.innerHTML)[1]
-            return adjustedPrices[text]
+            return getPoints(text)
         })
         .forEach(choise => {
             let text = pointsRegexp.exec(choise.innerHTML)[1]
-            let points = adjustedPrices[text];
+            let points = getPoints(text);
             let originalPoints = choise.lastElementChild.textContent.split(" POINT")[0]
             let delta = points - originalPoints
             choise.lastElementChild.innerHTML = points + "<sup>*</sup>" + " POINTS"

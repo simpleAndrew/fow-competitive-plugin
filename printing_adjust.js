@@ -42,11 +42,11 @@ function overrideOptionPoints(divContainer) {
 
     unitNames.filter(choise => {
             let text = choise.innerText
-            return getAdjustedPoints(text)
+            return getPointsForPrinting(text)
         })
         .forEach(choise => {
             let selectionName = choise.innerText
-            let points = getAdjustedPoints(selectionName);
+            let points = getPointsForPrinting(selectionName);
             let pointsContainer = choise.parentElement.querySelector('div[class="cssCP"]')
             let originalPoints = parseInt(pointsContainer.textContent)
             pointsContainer.innerHTML = points + "<sup>*</sup>"
