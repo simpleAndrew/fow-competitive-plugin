@@ -4,6 +4,7 @@ let armyDivs = document.querySelectorAll('div[class="cssReport"] div')
 
 let currentFormation = null
 let currentUnit = null
+let currentUnitName = null
 let currentFormationDelta = 0
 let currentUnitDelta = 0
 let armyD = 0
@@ -16,6 +17,7 @@ armyDivs.forEach(currentDiv => {
     } else if(isUnitDiv(currentDiv)) {
         overrideUnitPoints()
         currentUnit = currentDiv
+        currentUnitName = currentDiv.firstElementChild.textContent
     } else if(isUnitOptionDiv(currentDiv)) {
         overrideOptionPoints(currentDiv)
     } else if(isUnitAddonDiv(currentDiv)) {
@@ -46,9 +48,9 @@ function isArmyDiv(div) {
 function overrideOptionPoints(divContainer) {
     let unitNames = divContainer.querySelectorAll('div[class="cssOptL"]');
 
-    unitNames.filter(choise => {return getPoints(choise.innerHTML)})
+    unitNames.filter(choise => {return getPoints(choise.innerHTML, currentUnitName)})
         .forEach(choise => {
-            let points = getPoints(choise.innerHTML);
+            let points = getPoints(choise.innerHTML, currentUnitName);
             let pointsContainer = choise.parentElement.querySelector('div[class="cssCP"]')
             let originalPoints = parseInt(pointsContainer.textContent)
             pointsContainer.innerHTML = points + "<sup>*</sup>"
@@ -90,6 +92,7 @@ function overrideUnitPoints() {
     currentFormationDelta += currentUnitDelta
     currentUnitDelta = 0
     currentUnit = null
+    currentUnitName = null
 }
 
 function overrideFormation() {
