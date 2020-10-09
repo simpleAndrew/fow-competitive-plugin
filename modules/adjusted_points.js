@@ -195,7 +195,7 @@ const adjustedOptionPrices = {
     "Replace up to two Panzer III (late 5cm) with Panzer IV (late 7.5cm) for +5 points each." : 2,
 
     //red banner
-    "Replace up to half of Valentine (late 2 pdr) with Valentine (6 pdr) for +1 point each": 2
+    "Replace up to half of Valentine (late 2 pdr) with Valentine (6 pdr) for +1 point each.": 2
 }
 
 const namedSoviet = {
