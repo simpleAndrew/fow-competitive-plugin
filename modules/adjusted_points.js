@@ -149,13 +149,37 @@ const redBanner = {
     "2x SU-152 (152mm)": 14
 }
 
+const fightingFirst = {
+    "5x M4 Sherman (75mm)": 32,
+    "4x M4 Sherman (75mm)": 25,
+    "3x M4 Sherman (75mm)": 18,
+    "2x M4 Sherman (75mm)": 13,
+    "1x M4 Sherman (75mm)": 7,
+
+    "4x T28E1 (37mm &amp; .50 cal)": 4,
+    "2x T28E1 (37mm &amp; .50 cal)": 2,
+
+    "6x M7 Priest (105mm)": 18,
+    "3x M7 Priest (105mm)": 9,
+
+    "4x M10 (3-inch)":28,
+    "3x M10 (3-inch)":21,
+    "2x M10 (3-inch)":14,
+
+    "3x M4 (81mm mortar)": 3,
+
+    "3x T30 (75mm)": 4,
+    "2x T30 (75mm)": 3
+}
+
 const adjustedPrices = _.merge(afrikaKorps,
     armouredFist,
     ironCross,
     ghostPanzers,
     avanti,
     enemyAtTheGates,
-    redBanner)
+    redBanner,
+    fightingFirst)
 
 const adjustedOptionPrices = {
     //DAK and Iron Cross
