@@ -22,15 +22,16 @@ setupSumbissionListeners()
 function overrideUnitPoints() {
     let choises = document.querySelectorAll('div[class="Choices"]');
 
+    let pointsRegexp = /(.+)<div.* POINTS.*/
     choises.map(element => {
         return element.querySelector('div[class="OChoice"]')
     })
         .filter(choise => {
-            let text = choise.firstChild.textContent
+            let text = pointsRegexp.exec(choise.innerHTML)[1]
             return adjustedPrices[text]
         })
         .forEach(choise => {
-            let text = choise.firstChild.textContent
+            let text = pointsRegexp.exec(choise.innerHTML)[1]
             let points = adjustedPrices[text];
             let originalPoints = choise.lastElementChild.textContent.split(" POINT")[0]
             let delta = points - originalPoints
