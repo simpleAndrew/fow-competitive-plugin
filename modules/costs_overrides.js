@@ -69,7 +69,6 @@ function storeDelta(armyId, formationId, unitId, delta) {
     formationPoints[unitId] = parseInt(delta)
 
     currentDelta[formationId] = formationPoints
-    currentDelta["time"] = Date.now()
 
     data[armyId] = currentDelta
 

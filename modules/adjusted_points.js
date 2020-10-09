@@ -40,9 +40,19 @@ const afrikaKorps = {
 
 const adjustedPrices = _.merge(afrikaKorps, armouredFist)
 
+const adjustedOptionPrices = {
+    "Replace any or all Panzer III (short 5cm) with Panzer III (long 5cm) for +2 points each.": 1,
+    "Uparmour any or all Panzer III (long 5cm) to Front 6 for +1 point each.": 2,
+    "Replace any or all short 5cm with 7.5cm for +3 points each.": 2,
+    "Replace any or all Panzer IV (short 7.5cm) with Panzer IV (long 7.5cm) for +4 points each.": 3
+}
 function getAdjustedPoints(unitText) {
     for(const [key, value] of Object.entries(adjustedPrices)){
         if(unitText.startsWith(key)) return value;
     }
     return null;
+}
+
+function getAdjustedOptionPoints(unitText) {
+    return adjustedOptionPrices[unitText.trim()]
 }
