@@ -46,7 +46,7 @@ function overrideUnitPoints() {
 }
 
 function overrideUnitOptionPoints() {
-    let pointsRegexp = /.+(\+(\d+) points?).*/
+    let pointsRegexp = /.+(([\+-]\d+) points?).*/
     let optionDivs = document.querySelectorAll('div[class="Options"]')
     optionDivs.map(div => {
         return div.childNodes[2]
@@ -70,7 +70,7 @@ function overrideUnitOptionPoints() {
             attr.value = currentDelta
             holder.attributes.setNamedItem(attr)
 
-            let newPointsText = "+ " + adjustedPrice + "<sup>*</sup> point" + (adjustedPrice > 1 ? "s" : "")
+            let newPointsText = (adjustedPrice > 0 ? "+" : "") + adjustedPrice + "<sup>*</sup> point" + (adjustedPrice > 1 ? "s" : "")
             let adjustedText = originalText.replace(parsedPoints, newPointsText)
             let newDescription = document.createElement('span');
             newDescription.innerHTML = adjustedText;
@@ -87,7 +87,7 @@ function calculateOptionsDelta() {
 
     if (checkedBoxes)
         checkedBoxes.filter(cBox => {
-            return cBox.checked;
+            return cBox.checked && cBox.attributes.getNamedItem("delta");
         }).map(box => {
                 let multiplier = box.parentNode.parentNode.querySelector("select")
                 let factor = multiplier ? parseInt(multiplier.value) : 1

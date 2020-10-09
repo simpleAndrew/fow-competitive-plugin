@@ -82,16 +82,16 @@ const ghostPanzers = {
     "1x StuG (late 7.5cm)": 9,
     "2x StuG (late 7.5cm)<br>1x StuH (10.5cm)": 27,
 
-    "4x Brummbar (15cm)": 24,
-    "3x Brummbar (15cm)": 18,
-    "2x Brummbar (15cm)": 12,
+    "4x Brummbär (15cm)": 24,
+    "3x Brummbär (15cm)": 18,
+    "2x Brummbär (15cm)": 12,
 
-    "4x Marder (7.5cm)": 25,
-    "3x Marder (7.5cm)": 19,
-    "2x Marder (7.5cm)": 13,
+    "4x Marder II (7.5cm)": 25,
+    "3x Marder II (7.5cm)": 19,
+    "2x Marder II (7.5cm)": 13,
 
-    "3x Sd Kfz 7/1 (2cm Quad)": 4,
-    "2x Sd Kfz 7/1 (2cm Quad)": 3,
+    "3x Sd Kfz 7/1 (2cm quad)": 4,
+    "2x Sd Kfz 7/1 (2cm quad)": 3,
 }
 
 const avanti = {
@@ -129,18 +129,25 @@ const enemyAtTheGates = {
 
     "3x BA-10 (45mm)": 3,
 
-    "28x DP MG &amp; M1819 rifle team<br>1x Komissar": 18,
-    "19x DP MG &amp; M1819 rifle team<br>1x Komissar": 12,
+    "28x M1891 rifle team<br>1x Komissar team": 20,
+    "19x M1891 rifle team<br>1x Komissar team": 13,
 
-    "28x M1819 rifle team<br>1x Komissar": 20,
-    "19x M1819 rifle team<br>1x Komissar": 13,
-
-    "5x KV-1S (76mm)": 35,
-    "4x KV-1S (76mm)": 28,
-    "3x KV-1S (76mm)": 21
+    "5x KV-1s (76mm)": 35,
+    "4x KV-1s (76mm)": 28,
+    "3x KV-1s (76mm)": 21,
 }
 
-const redBanner = {}
+const redBanner = {
+    "4x SU-85 (85mm)": 31,
+    "3x SU-85 (85mm)": 23,
+    "2x SU-85 (85mm)": 15,
+
+    "4x SU-122 (122mm)": 16,
+    "2x SU-122 (122mm)": 12,
+    "3x SU-122 (122mm)": 8,
+
+    "2x SU-152 (152mm)": 14
+}
 
 const adjustedPrices = _.merge(afrikaKorps,
     armouredFist,
@@ -151,10 +158,18 @@ const adjustedPrices = _.merge(afrikaKorps,
     redBanner)
 
 const adjustedOptionPrices = {
+    //DAK and Iron Cross
     "Replace any or all Panzer III (short 5cm) with Panzer III (long 5cm) for +2 points each.": 1,
     "Uparmour any or all Panzer III (long 5cm) to Front 6 for +1 point each.": 2,
     "Replace any or all short 5cm with 7.5cm for +3 points each.": 2,
-    "Replace any or all Panzer IV (short 7.5cm) with Panzer IV (long 7.5cm) for +4 points each.": 3
+    "Replace any or all Panzer IV (short 7.5cm) with Panzer IV (long 7.5cm) for +4 points each.": 3,
+
+    //ghost panzers
+    "Replace up to one Panzer IV (late 7.5cm) with Panzer III (late 7.5cm) for -4 points.": -1,
+    "Replace up to two Panzer III (late 5cm) with Panzer IV (late 7.5cm) for +5 points each." : 2,
+
+    //red banner
+    "Replace up to half of Valentine (late 2 pdr) with Valentine (6 pdr) for +1 point each": 2
 }
 
 const namedSoviet = {
@@ -180,7 +195,29 @@ const namedSoviet = {
 
     "T-34 Hero Tank Company" : {
         "3x T-34 (76mm)": 17
+    },
+
+    "Rifle Company" : {
+        "28x DP MG and M1891 rifle team<br>1x Komissar team": 18,
+        "19x DP MG and M1891 rifle team<br>1x Komissar team": 12
+    },
+
+    "Motor Rifle Company" : {
+        "28x DP MG &amp; M1891 rifle team<br>1x Komissar team": 22,
+        "19x DP MG &amp; M1891 rifle team<br>1x Komissar team": 15
+    },
+
+    "KV-1s Guards Heavy Tank Company": {
+        "5x KV-1s (76mm)": 43,
+        "4x KV-1s (76mm)": 34,
+        "3x KV-1s (76mm)": 25,
+        "2x KV-1s (76mm)": 16
+    },
+
+    "KV-1s Guards Heavy Tank Regiment HQ": {
+        "1x KV-1s (76mm)": 8
     }
+
 }
 
 const namedUnitsOverrides = namedSoviet
