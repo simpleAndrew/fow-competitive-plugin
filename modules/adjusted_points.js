@@ -44,15 +44,17 @@ const ironCross = {
     "3x StuG (long 7.5cm)": 21,
     "2x StuG (long 7.5cm)": 13,
 
-    "4x 5cm guns": 12,
+    "4x 5cm gun": 12,
+    "3x 5cm gun": 9,
+    "2x 5cm gun": 6,
 
-    "4x 3.7cm guns": 7,
-    "3x 3.7cm guns": 5,
-    "2x 3.7cm guns": 3,
+    "4x 3.7cm gun": 7,
+    "3x 3.7cm gun": 5,
+    "2x 3.7cm gun": 3,
 
-    "4x 3.7cm (stielgranate) guns": 9,
-    "3x 3.7cm (stielgranate) guns": 7,
-    "2x 3.7cm (stielgranate) guns": 4,
+    "4x 3.7cm (Stielgranate) gun": 9,
+    "3x 3.7cm (Stielgranate) gun": 7,
+    "2x 3.7cm (Stielgranate) gun": 4,
 }
 
 const ghostPanzers = {
