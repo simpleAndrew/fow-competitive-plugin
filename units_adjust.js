@@ -70,7 +70,10 @@ function overrideUnitOptionPoints() {
             attr.value = currentDelta
             holder.attributes.setNamedItem(attr)
 
-            let newPointsText = (adjustedPrice > 0 ? "+" : "") + adjustedPrice + "<sup>*</sup> point" + (adjustedPrice > 1 ? "s" : "")
+            let newPointsText = (adjustedPrice > 0 ? "+" : "")
+                + adjustedPrice + "<sup>*</sup> point"
+                + ((adjustedPrice === 1 || adjustedPrice === -1) ? "" : "s")
+
             let adjustedText = originalText.replace(parsedPoints, newPointsText)
             let newDescription = document.createElement('span');
             newDescription.innerHTML = adjustedText;

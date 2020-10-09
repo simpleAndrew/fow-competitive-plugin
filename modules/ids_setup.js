@@ -13,6 +13,11 @@ function unitInitIds() {
     unitName = document.querySelector('div[class="UTitle"]').textContent
 }
 
+function printInitIds() {
+    let urlString = document.location.pathname.split("/")
+    armyId = urlString[3]
+}
+
 function forceInitIds() {
     let urlString = document.location.pathname.split("/")
     armyId = urlString[3]

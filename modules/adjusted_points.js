@@ -248,17 +248,11 @@ const namedSoviet = {
 
 const namedUnitsOverrides = namedSoviet
 
-function getPoints(optionText) {
-    if (namedUnitsOverrides[unitName]) {
-        return namedUnitsOverrides[unitName][optionText]
-    } else return adjustedPrices[optionText]
-}
-
-function getPointsForPrinting(unitText) {
-    for (const [key, value] of Object.entries(adjustedPrices)) {
-        if (unitText.startsWith(key)) return value;
-    }
-    return null;
+function getPoints(optionText, unitCustomName = unitName) {
+    let trimmedOption = optionText.trim()
+    if (namedUnitsOverrides[unitCustomName]) {
+        return namedUnitsOverrides[unitCustomName][trimmedOption]
+    } else return adjustedPrices[trimmedOption]
 }
 
 function getAdjustedOptionPoints(unitText) {
