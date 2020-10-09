@@ -1,0 +1,67 @@
+{
+  "name": "Flames Of War Competitive",
+  "version": "1.0",
+  "description": "Plugin for Forces FoW builder to replace point with competitive ones",
+  "permissions": ["activeTab", "declarativeContent", "storage"],
+  "options_page": "options.html",
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://forces.flamesofwar.com/UnitDiagram/*"],
+      "run_at": "document_end",
+      "js": [
+        "modules/lodash.js",
+        "modules/adjusted_points.js",
+        "modules/utils_setup.js",
+        "modules/ids_setup.js",
+        "modules/costs_overrides.js",
+        "units_adjust.js"
+      ]
+    },
+    {
+      "matches": ["https://forces.flamesofwar.com/ForceDiagram/*"],
+      "exclude_matches": ["https://forces.flamesofwar.com/ForceDiagram/Print/*"],
+      "run_at": "document_end",
+      "css": ["modules/overrides.css"],
+      "js": [
+        "modules/lodash.js",
+        "modules/adjusted_points.js",
+        "modules/utils_setup.js",
+        "modules/ids_setup.js",
+        "modules/costs_overrides.js",
+        "forces_adjust.js"
+      ]
+    },
+    {
+      "matches": ["https://forces.flamesofwar.com/ForceDiagram/Print/*"],
+      "run_at": "document_end",
+      "js": [
+        "modules/lodash.js",
+        "modules/adjusted_points.js",
+        "modules/utils_setup.js",
+        "modules/ids_setup.js",
+        "modules/costs_overrides.js",
+        "printing_adjust.js"
+      ]
+    }
+  ],
+  "page_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "images/16 12.png",
+      "32": "images/32 12.png",
+      "48": "images/48 12.png",
+      "128": "images/128 12.png"
+    }
+  },
+  "icons": {
+    "16": "images/16 12.png",
+    "32": "images/32 12.png",
+    "48": "images/48 12.png",
+    "128": "images/128 12.png"
+  },
+  "manifest_version": 2
+}
