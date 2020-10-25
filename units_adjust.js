@@ -115,13 +115,26 @@ function setupSumbissionListeners() {
     let saveBtn = document.querySelector('button[id="btnSave"]')
     saveBtn.addEventListener("click", function (e) {
         let extraD = calculateOptionsDelta()
-        storeDelta(armyId, formationId, unitId, delta + extraD)
+        let multiplier = detectDeltaMultiplier()
+        storeDelta(armyId, formationId, unitId, delta * multiplier + extraD)
     })
 
     let clearBtn = document.querySelector('button[id="btnClear"]')
     clearBtn.addEventListener("click", function () {
         clearUnitDelta(armyId, formationId, unitId)
     })
+}
+
+function detectDeltaMultiplier() {
+    let optionCnt = document.querySelectorAll('div[class="Options"]')
+        .filter(div => div.textContent.trim().startsWith("Total cards:"))
+
+    if (optionCnt[0]) {
+        let selectedOpt = optionCnt[0].querySelector("select")
+        return selectedOpt ? parseInt(selectedOpt.value) : 1
+    } else {
+        return 1;
+    }
 }
 
 function setupSelectionChangeListeners() {

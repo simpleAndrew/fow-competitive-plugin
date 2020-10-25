@@ -41,6 +41,7 @@ const afrikaKorps = {
 const ironCross = {
     "3x StuG (short 7.5cm)": 12,
     "2x StuG (short 7.5cm)": 8,
+    "4x StuG (long 7.5cm)": 28,
     "3x StuG (long 7.5cm)": 21,
     "2x StuG (long 7.5cm)": 13,
 
@@ -81,12 +82,15 @@ const ghostPanzers = {
     "4x StuG (late 7.5cm)": 36,
     "3x StuG (late 7.5cm)": 27,
     "2x StuG (late 7.5cm)": 18,
+
     "1x StuG (late 7.5cm)": 9,
     "2x StuG (late 7.5cm)<br>1x StuH (10.5cm)": 27,
 
     "4x Brummbär (15cm)": 24,
     "3x Brummbär (15cm)": 18,
     "2x Brummbär (15cm)": 12,
+    "2x Brummbär": 12,
+    "1x Brummbär": 6,
 
     "4x Marder II (7.5cm)": 25,
     "3x Marder II (7.5cm)": 19,
@@ -193,6 +197,7 @@ const adjustedOptionPrices = {
     //ghost panzers
     "Replace up to one Panzer IV (late 7.5cm) with Panzer III (late 7.5cm) for -4 points.": -1,
     "Replace up to two Panzer III (late 5cm) with Panzer IV (late 7.5cm) for +5 points each." : 2,
+    "Replace any or all StuG (long 7.5cm) assault guns with StuG (late 7.5cm) (MG251) for +4 points per tank.": 3,
 
     //red banner
     "Replace up to half of Valentine (late 2 pdr) with Valentine (6 pdr) for +1 point each.": 2
@@ -242,19 +247,122 @@ const namedSoviet = {
 
     "KV-1s Guards Heavy Tank Regiment HQ": {
         "1x KV-1s (76mm)": 8
+    },
+
+    "Reconnaissance by Combat": {
+        "Command Card Reconnaissance by Combat": 3
+    },
+
+    "BA-10 Armoured Car Company": {
+        "1x BA-10 (45mm)": 3
+    },
+
+    "SU-152 Medium SP Regiment" : {
+        "1x KV-1s (76mm)": 8
     }
-
 }
 
-const namedUnitsOverrides = namedSoviet
+const namedFightingFirst = {
+    "M3A1 Armored Recon Company": {
+        "2x M3A1 armoured car from (MU107)": 4
+    }
+}
 
-function getPoints(optionText, unitCustomName = unitName) {
+const namedArmouredFist = {
+    "New Zealand Divisional Cavalry" : {
+        "2x Honey from (MB107)" : 5
+    },
+
+    "Australian Divisional Cavalry" : {
+        "2x Crusader II from (MB104)": 5
+    },
+
+    "Mailed Fist Armoured Car Squadron" : {
+        "3x Humber armoured cars from (MB115)": 5,
+        "4x Humber armoured cars from (MB115)": 6
+    },
+
+    "Daimler Armoured Car Squadron" : {
+        "3x Humber armoured cars from (MB115)": 5,
+        "4x Humber armoured cars from (MB115)": 6
+    },
+
+    "Humber Armoured Car Squadron" : {
+        "3x Humber armoured cars from (MB115)": 5,
+        "4x Humber armoured cars from (MB115)": 6
+    },
+
+    "Artillery Expert": {
+        "Command Card Artillery Expert": 2
+    },
+
+    "Scout Tanks" : {
+        "Command Card Scout Tanks": 3
+    }
+}
+
+const namedGerman = {
+    "Armoured Car Company": {
+        "1x Sd Kfz 221 (MG)" : 3
+    },
+    "Captured 6 pdr Anti-tank (with 3 guns)" : {
+        "Command Card Captured 6 pdr Anti-tank (with 3 guns)": -1
+    },
+    "Captured 6 pdr Anti-tank (with 2 guns)" : {
+        "Command Card Captured 6 pdr Anti-tank (with 2 guns)": -1
+    },
+    "Armoured FlaK Half-tracks": {
+        "Armoured FlaK Half-tracks Command Card": 2
+    }
+}
+
+const namedItalian = {
+
+    "Tactical Brilliance": {
+        "Command Card Tactical Brilliance": 3
+    },
+
+    "AB41 Armoured Car Company HQ": {
+        "2x AB41 (20mm) from (MI113)": 3
+    },
+
+    "L6/40 Scout Tank Company HQ": {
+        "4x L6/40 (20mm)": 7,
+        "3x L6/40 (20mm)": 6,
+        "2x L6/40 (20mm)": 5
+    },
+}
+
+const namedUnitsOverrides = _.merge(namedSoviet, namedArmouredFist, namedGerman, namedFightingFirst, namedItalian)
+
+const namedAdditionalOptionPoints = {}
+
+const formationUnitOverrides = {
+    "156": {
+        "L6/40 Light Tank Company HQ": {
+            "4x L6/40 (20mm)": 8,
+            "3x L6/40 (20mm)": 6,
+            "2x L6/40 (20mm)": 4
+        },
+
+        "L6/40 Light Tank Platoon": {
+            "5x L6/40 (20mm)": 10,
+            "4x L6/40 (20mm)": 8,
+            "3x L6/40 (20mm)": 6,
+        }
+    }
+}
+
+function getPoints(optionText, unitCustomName = unitName, customFormationId = formationId) {
     let trimmedOption = optionText.trim()
-    if (namedUnitsOverrides[unitCustomName]) {
-        return namedUnitsOverrides[unitCustomName][trimmedOption]
-    } else return adjustedPrices[trimmedOption]
+    let formationOvers = formationUnitOverrides[customFormationId.split("-")[0]] || {}
+    let namedOvers = namedUnitsOverrides[unitCustomName] || {};
+    return (formationOvers[unitCustomName] || {})[trimmedOption]
+        || namedOvers[trimmedOption]
+        || adjustedPrices[trimmedOption]
 }
 
-function getAdjustedOptionPoints(unitText) {
-    return adjustedOptionPrices[unitText.trim()]
+function getAdjustedOptionPoints(additionalOptionPrice) {
+    let trimmedName = additionalOptionPrice.trim()
+    return adjustedOptionPrices[trimmedName];
 }
