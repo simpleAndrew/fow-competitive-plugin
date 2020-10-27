@@ -105,11 +105,11 @@ const avanti = {
     "2x Autocannone (20mm)": 2,
 
     "3x Breda MG team<br>1x Breda HMG team<br>1x 20mm anti-tank rifle": 6,
-    "4x Breda MG team<br>1x Breda HMG team<br>1x 20mm anti-tank rifle": 5,
+    "2x Breda MG team<br>1x Breda HMG team<br>1x 20mm anti-tank rifle": 5,
 
-    "4x 47mm guns": 6,
-    "3x 47mm guns": 4,
-    "2x 47mm guns": 2,
+    "4x 47mm gun": 6,
+    "3x 47mm gun": 4,
+    "2x 47mm gun": 2,
 
     "5x L6/40 (20mm)": 7,
     "4x L6/40 (20mm)": 5,
@@ -118,8 +118,8 @@ const avanti = {
     "4x AB41 (20mm)": 4,
     "3x AB41 (20mm)": 3,
 
-    "4x 100mm howitzers": 10,
-    "2x 100mm howitzers": 5,
+    "4x 100mm howitzer": 10,
+    "2x 100mm howitzer": 5,
 }
 
 const enemyAtTheGates = {
