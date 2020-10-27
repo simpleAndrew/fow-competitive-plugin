@@ -200,7 +200,11 @@ const adjustedOptionPrices = {
     "Replace any or all StuG (long 7.5cm) assault guns with StuG (late 7.5cm) (MG251) for +4 points per tank.": 3,
 
     //red banner
-    "Replace up to half of Valentine (late 2 pdr) with Valentine (6 pdr) for +1 point each.": 2
+    "Replace up to half of Valentine (late 2 pdr) with Valentine (6 pdr) for +1 point each.": 2,
+
+    //avanti
+    "Command Card Captured 6 pdr Anti-tank (with 3 guns)": -1,
+    "Command Card Captured 6 pdr Anti-tank (with 2 guns)": -1
 }
 
 const namedSoviet = {
@@ -353,9 +357,34 @@ const formationUnitOverrides = {
     }
 }
 
+const formationNameUnitOverrides = {
+    "L6/40 Light Tank Company Command Card" : {
+        "L6/40 Light Tank Company HQ": {
+            "4x L6/40 (20mm)": 8,
+            "3x L6/40 (20mm)": 6,
+            "2x L6/40 (20mm)": 4
+        },
+
+        "L6/40 Light Tank Platoon": {
+            "5x L6/40 (20mm)": 10,
+            "4x L6/40 (20mm)": 8,
+            "3x L6/40 (20mm)": 6,
+        }
+    }
+}
+
 function getPoints(optionText, unitCustomName = unitName, customFormationId = formationId) {
     let trimmedOption = optionText.trim()
-    let formationOvers = formationUnitOverrides[customFormationId.split("-")[0]] || {}
+    let formationOvers = customFormationId ? formationUnitOverrides[customFormationId.split("-")[0]] || {} : {}
+    let namedOvers = namedUnitsOverrides[unitCustomName] || {};
+    return (formationOvers[unitCustomName] || {})[trimmedOption]
+        || namedOvers[trimmedOption]
+        || adjustedPrices[trimmedOption]
+}
+
+function getPointsWithFormationName(optionText, unitCustomName = unitName, formationName = null) {
+    let trimmedOption = optionText.trim()
+    let formationOvers = formationName ? formationNameUnitOverrides[formationName] || {} : {}
     let namedOvers = namedUnitsOverrides[unitCustomName] || {};
     return (formationOvers[unitCustomName] || {})[trimmedOption]
         || namedOvers[trimmedOption]

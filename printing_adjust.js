@@ -1,8 +1,29 @@
 printInitIds()
 
+
+function fixTheBrokenCards() {
+    const fixes = {
+        "Command Card Captured 6 pdr Anti-tank (with 3 guns)": -3,
+        "Command Card Captured 6 pdr Anti-tank (with 2 guns)": -2
+    }
+    document.querySelectorAll('div[class="cssO"] div[class="cssOpt"]')
+        .filter( div => fixes[div.innerText.trim()])
+        .forEach(div => {
+            let optName = div.innerText.trim()
+            div.setAttribute("class","cssOptL")
+            let points = document.createElement('div');
+            points.setAttribute("class","cssCP")
+            points.innerText = fixes[optName]
+            div.parentNode.appendChild(points)
+        })
+}
+
+fixTheBrokenCards()
+
 let armyDivs = document.querySelectorAll('div[class="cssReport"] div')
 
 let currentFormation = null
+let currentFormationName = null
 let currentUnit = null
 let currentUnitName = null
 let currentFormationDelta = 0
@@ -14,6 +35,7 @@ armyDivs.forEach(currentDiv => {
         overrideUnitPoints()
         overrideFormation()
         currentFormation = currentDiv
+        currentFormationName = currentDiv.firstElementChild.textContent
     } else if(isUnitDiv(currentDiv)) {
         overrideUnitPoints()
         currentUnit = currentDiv
@@ -48,9 +70,9 @@ function isArmyDiv(div) {
 function overrideOptionPoints(divContainer) {
     let unitNames = divContainer.querySelectorAll('div[class="cssOptL"]');
 
-    unitNames.filter(choise => {return getPoints(choise.innerHTML, currentUnitName)})
+    unitNames.filter(choise => {return getPointsWithFormationName(choise.innerHTML, currentUnitName, currentFormationName)})
         .forEach(choise => {
-            let points = getPoints(choise.innerHTML, currentUnitName);
+            let points = getPointsWithFormationName(choise.innerHTML, currentUnitName, currentFormationName);
             let pointsContainer = choise.parentElement.querySelector('div[class="cssCP"]')
             let originalPoints = parseInt(pointsContainer.textContent)
             pointsContainer.innerHTML = points + "<sup>*</sup>"
@@ -63,7 +85,17 @@ function overrideAddOnPoints(divContainer) {
 
     let addOnRegexp = /(.+(([+-]\d+) points?).+)(\n&nbsp;\((\d+) selected\).*)?/
     let originalHtml = container.innerHTML
-    let parts = addOnRegexp.exec(originalHtml)
+    let parts = addOnRegexp.exec(container.textContent.trim())
+
+    if(!parts) {
+        let cardsSelectedRegexp = /.*Total cards:\n&nbsp;\((\d+) selected\)/
+        let factorParts = cardsSelectedRegexp.exec(originalHtml)
+        if (factorParts) {
+            let unitFactor = parseInt(factorParts[1])
+            currentUnitDelta *= unitFactor
+        }
+        return
+    }
 
     let optionText = parts[1]
 
@@ -104,6 +136,7 @@ function overrideFormation() {
     armyD += currentFormationDelta
     currentFormationDelta = 0
     currentFormation = null
+    currentFormationName = null
 }
 
 function overrideArmy(div) {
