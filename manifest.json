@@ -9,6 +9,10 @@
       "run_at": "document_end",
       "js": [
         "modules/lodash.js",
+        "modules/points/cards.js",
+        "modules/points/allies.js",
+        "modules/points/axis.js",
+        "modules/points/soviets.js",
         "modules/adjusted_points.js",
         "modules/utils_setup.js",
         "modules/ids_setup.js",
@@ -23,6 +27,10 @@
       "css": ["modules/overrides.css"],
       "js": [
         "modules/lodash.js",
+        "modules/points/cards.js",
+        "modules/points/allies.js",
+        "modules/points/axis.js",
+        "modules/points/soviets.js",
         "modules/adjusted_points.js",
         "modules/utils_setup.js",
         "modules/ids_setup.js",
@@ -35,6 +43,10 @@
       "run_at": "document_end",
       "js": [
         "modules/lodash.js",
+        "modules/points/cards.js",
+        "modules/points/allies.js",
+        "modules/points/axis.js",
+        "modules/points/soviets.js",
         "modules/adjusted_points.js",
         "modules/utils_setup.js",
         "modules/ids_setup.js",
