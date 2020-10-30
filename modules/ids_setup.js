@@ -23,3 +23,14 @@ function forceInitIds() {
     armyId = urlString[3]
     formationId = urlString[4]+ '-' + urlString[5]
 }
+
+function isFormationSupported(formation) {
+    const formationRegex = /(\d+).*/
+    let formId = formationRegex.exec(formation)[1]
+    if(formId) {
+        let formNum = parseInt(formId)
+        return formNum < 200
+    } else {
+        return false
+    }
+}

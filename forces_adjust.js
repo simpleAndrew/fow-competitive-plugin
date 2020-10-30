@@ -1,13 +1,8 @@
 forceInitIds()
-chrome.storage.local.get(armyId, function (storedArmyPoints) {
-    if (storedArmyPoints) {
-        armyPoints = storedArmyPoints
-        let nodes = document.querySelectorAll('div[class="cssPtLine"] div')
-        overrideFormationPoints(nodes[1])
-        overrideArmyPoints(nodes[2])
-        overrideStoredFormationCosts()
-    }
-})
+
+
+
+
 
 function overrideStoredFormationCosts() {
     const pointsRegexp = /Modify \((\d+) .+/
@@ -26,11 +21,28 @@ function overrideStoredFormationCosts() {
     });
 }
 
-let resetForce = document.querySelector('li[id="ucHeader_hclear"] a')
-    if(resetForce)
-        resetForce.addEventListener("click", function ()  {clearArmyDelta(armyId)})
+if (isFormationSupported(formationId)) {
+    chrome.storage.local.get(armyId, function (storedArmyPoints) {
+        if (storedArmyPoints) {
+            armyPoints = storedArmyPoints
+            let nodes = document.querySelectorAll('div[class="cssPtLine"] div')
+            overrideFormationPoints(nodes[1])
+            overrideArmyPoints(nodes[2])
+            overrideStoredFormationCosts()
+        }
+    })
 
-let resetFormation = document.querySelector('li[id="ucHeader_hform"] a')
-    if(resetFormation)
-        resetFormation.addEventListener("click", function ()  {clearFormationDelta(armyId, formationId)})
+    let resetForce = document.querySelector('li[id="ucHeader_hclear"] a')
 
+    if (resetForce)
+        resetForce.addEventListener("click", function () {
+            clearArmyDelta(armyId)
+        })
+
+    let resetFormation = document.querySelector('li[id="ucHeader_hform"] a')
+
+    if (resetFormation)
+        resetFormation.addEventListener("click", function () {
+            clearFormationDelta(armyId, formationId)
+        })
+}

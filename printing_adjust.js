@@ -7,20 +7,18 @@ function fixTheBrokenCards() {
         "Command Card Captured 6 pdr Anti-tank (with 2 guns)": -2
     }
     document.querySelectorAll('div[class="cssO"] div[class="cssOpt"]')
-        .filter( div => fixes[div.innerText.trim()])
+        .filter(div => fixes[div.innerText.trim()])
         .forEach(div => {
             let optName = div.innerText.trim()
-            div.setAttribute("class","cssOptL")
+            div.setAttribute("class", "cssOptL")
             let points = document.createElement('div');
-            points.setAttribute("class","cssCP")
+            points.setAttribute("class", "cssCP")
             points.innerText = fixes[optName]
             div.parentNode.appendChild(points)
         })
 }
 
 fixTheBrokenCards()
-
-let armyDivs = document.querySelectorAll('div[class="cssReport"] div')
 
 let currentFormation = null
 let currentFormationName = null
@@ -30,39 +28,22 @@ let currentFormationDelta = 0
 let currentUnitDelta = 0
 let armyD = 0
 
-armyDivs.forEach(currentDiv => {
-    if(isFormationDiv(currentDiv)) {
-        overrideUnitPoints()
-        overrideFormation()
-        currentFormation = currentDiv
-        currentFormationName = currentDiv.firstElementChild.textContent
-    } else if(isUnitDiv(currentDiv)) {
-        overrideUnitPoints()
-        currentUnit = currentDiv
-        currentUnitName = currentDiv.firstElementChild.textContent
-    } else if(isUnitOptionDiv(currentDiv)) {
-        overrideOptionPoints(currentDiv)
-    } else if(isUnitAddonDiv(currentDiv)) {
-        overrideAddOnPoints(currentDiv)
-    } else if(isArmyDiv(currentDiv)) {
-        overrideUnitPoints()
-        overrideFormation()
-        overrideArmy(currentDiv)
-    }
-})
-
-function isFormationDiv(div){
+function isFormationDiv(div) {
     return div.querySelector('div[class="cssFrm"');
 }
+
 function isUnitDiv(div) {
     return div.querySelector('div[class="cssUnit"');
 }
+
 function isUnitOptionDiv(div) {
     return (div.children[0] || {}).className === "cssOptL";
 }
+
 function isUnitAddonDiv(div) {
     return (div.children[0] || {}).className === "cssOpt";
 }
+
 function isArmyDiv(div) {
     return div.className === "cssTotal";
 }
@@ -70,7 +51,9 @@ function isArmyDiv(div) {
 function overrideOptionPoints(divContainer) {
     let unitNames = divContainer.querySelectorAll('div[class="cssOptL"]');
 
-    unitNames.filter(choise => {return getPointsWithFormationName(choise.innerHTML, currentUnitName, currentFormationName)})
+    unitNames.filter(choise => {
+        return getPointsWithFormationName(choise.innerHTML, currentUnitName, currentFormationName)
+    })
         .forEach(choise => {
             let points = getPointsWithFormationName(choise.innerHTML, currentUnitName, currentFormationName);
             let pointsContainer = choise.parentElement.querySelector('div[class="cssCP"]')
@@ -87,7 +70,7 @@ function overrideAddOnPoints(divContainer) {
     let originalHtml = container.innerHTML
     let parts = addOnRegexp.exec(container.textContent.trim())
 
-    if(!parts) {
+    if (!parts) {
         let cardsSelectedRegexp = /.*Total cards:\n&nbsp;\((\d+) selected\)/
         let factorParts = cardsSelectedRegexp.exec(originalHtml)
         if (factorParts) {
@@ -100,7 +83,7 @@ function overrideAddOnPoints(divContainer) {
     let optionText = parts[1]
 
     let adjustedOptionPoints = getAdjustedOptionPoints(optionText);
-    if(adjustedOptionPoints !== undefined  && adjustedOptionPoints !== 0) {
+    if (adjustedOptionPoints !== undefined && adjustedOptionPoints !== 0) {
         let pointsText = parts[2]
         let pointsVal = parts[3]
         let priceDelta = adjustedOptionPoints - parseInt(pointsVal)
@@ -128,7 +111,7 @@ function overrideUnitPoints() {
 }
 
 function overrideFormation() {
-    if(currentFormation && currentFormationDelta !== 0) {
+    if (currentFormation && currentFormationDelta !== 0) {
         let pointsDiv = currentFormation.querySelector('div[class="cssPts"')
         let originalPoints = parseInt(pointsDiv.textContent)
         pointsDiv.innerHTML = (originalPoints + currentFormationDelta) + "<sup>*</sup>"
@@ -140,9 +123,35 @@ function overrideFormation() {
 }
 
 function overrideArmy(div) {
-    if(armyDelta !== 0) {
+    if (armyDelta !== 0) {
         let pointsDiv = div.lastChild
         let originalPoints = parseInt(pointsDiv.textContent.split(":")[1])
         pointsDiv.innerHTML = "Total Points:" + (originalPoints + armyD) + "<sup>*</sup>"
     }
+}
+
+
+if (isFormationSupported(formationId)) {
+    let armyDivs = document.querySelectorAll('div[class="cssReport"] div')
+
+    armyDivs.forEach(currentDiv => {
+        if (isFormationDiv(currentDiv)) {
+            overrideUnitPoints()
+            overrideFormation()
+            currentFormation = currentDiv
+            currentFormationName = currentDiv.firstElementChild.textContent
+        } else if (isUnitDiv(currentDiv)) {
+            overrideUnitPoints()
+            currentUnit = currentDiv
+            currentUnitName = currentDiv.firstElementChild.textContent
+        } else if (isUnitOptionDiv(currentDiv)) {
+            overrideOptionPoints(currentDiv)
+        } else if (isUnitAddonDiv(currentDiv)) {
+            overrideAddOnPoints(currentDiv)
+        } else if (isArmyDiv(currentDiv)) {
+            overrideUnitPoints()
+            overrideFormation()
+            overrideArmy(currentDiv)
+        }
+    })
 }
