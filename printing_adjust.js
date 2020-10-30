@@ -154,4 +154,9 @@ if (isFormationSupported(formationId)) {
             overrideArmy(currentDiv)
         }
     })
+
+    if(armyD !== 0) {
+        let titleDiv = document.querySelector('div[class="cssTitle"]')
+        titleDiv.innerHTML += "<sup>*</sup> (Competitive Points)"
+    }
 }
