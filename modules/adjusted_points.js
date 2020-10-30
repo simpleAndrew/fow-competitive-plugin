@@ -48,6 +48,7 @@ const ironCross = {
     "4x 5cm gun": 12,
     "3x 5cm gun": 9,
     "2x 5cm gun": 6,
+    "2x 5cm gun": 6,
 
     "4x 3.7cm gun": 7,
     "3x 3.7cm gun": 5,
@@ -149,8 +150,8 @@ const redBanner = {
     "2x SU-85 (85mm)": 15,
 
     "4x SU-122 (122mm)": 16,
-    "2x SU-122 (122mm)": 12,
-    "3x SU-122 (122mm)": 8,
+    "3x SU-122 (122mm)": 12,
+    "2x SU-122 (122mm)": 8,
 
     "2x SU-152 (152mm)": 14
 }
