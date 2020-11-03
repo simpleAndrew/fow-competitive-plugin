@@ -138,6 +138,10 @@ const namedItalian = {
         "Command Card Tactical Brilliance": 3
     },
 
+    "Captured 25 pdr Artillery": {
+        "Command Card Captured 25 pdr Artillery": 2
+    },
+
     "AB41 Armoured Car Company HQ": {
         "2x AB41 (20mm) from (MI113)": 3
     },

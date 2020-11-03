@@ -9,10 +9,22 @@ const enemyAtTheGates = {
     "3x T-34 (76mm)": 12,
     "1x T-34 (76mm)": 4,
 
+    "10x OT-34 (76mm)": 40,
+    "9x OT-34 (76mm)": 36,
+    "8x OT-34 (76mm)": 32,
+    "7x OT-34 (76mm)": 28,
+    "6x OT-34 (76mm)": 24,
+    "5x OT-34 (76mm)": 20,
+    "4x OT-34 (76mm)": 16,
+    "3x OT-34 (76mm)": 12,
+
     "3x BA-10 (45mm)": 3,
 
     "28x M1891 rifle team<br>1x Komissar team": 20,
     "19x M1891 rifle team<br>1x Komissar team": 13,
+
+    "22x PPSh SMG team<br>1x Komissar team": 17,
+    "15x PPSh SMG team<br>1x Komissar team": 12,
 
     "5x KV-1s (76mm)": 35,
     "4x KV-1s (76mm)": 28,
