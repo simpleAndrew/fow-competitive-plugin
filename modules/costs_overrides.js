@@ -4,7 +4,7 @@ function overrideUnitCost(node) {
     let delta = ((armyPoints[armyId] || {})[formationId] || {})[unitId] || 0
 
     let originalPoints = parseInt(node.textContent.split(":")[1])
-    if (delta !== 0 && originalPoints !== 0) {
+    if (delta !== 0) {
         let currentPoints = originalPoints + delta
         node.innerHTML = "Unit: " + currentPoints + "<sup>*</sup>"
         node.setAttribute("title", originalPoints + " by default")
@@ -15,7 +15,7 @@ function overrideFormationPoints(node) {
     let delta = formationDelta(formationId)
 
     let originalPoints = parseInt(node.textContent.split(":")[1])
-    if (delta !== 0 && originalPoints !== 0) {
+    if (delta !== 0) {
         let currentPoints = originalPoints + delta
         node.innerHTML = "Formation: " + currentPoints + "<sup>*</sup>"
         node.setAttribute("title", originalPoints + " by default")
@@ -25,7 +25,7 @@ function overrideFormationPoints(node) {
 function overrideArmyPoints(node) {
     let delta = armyDelta()
     let originalPoints = parseInt(node.textContent.split(":")[1])
-    if (delta !== 0 && originalPoints !== 0) {
+    if (delta !== 0) {
         let currentPoints = originalPoints + delta
         node.innerHTML = "All: " + currentPoints + "<sup>*</sup>"
         node.setAttribute("title", originalPoints + " by default")
