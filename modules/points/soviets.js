@@ -23,6 +23,9 @@ const enemyAtTheGates = {
     "28x M1891 rifle team<br>1x Komissar team": 20,
     "19x M1891 rifle team<br>1x Komissar team": 13,
 
+    "28x DP MG &amp; M1891 rifle team<br>1 Komissar team": 22,
+    "19 DP MG &amp; M1891 rifle team<br>1 Komissar team": 15,
+
     "22x PPSh SMG team<br>1x Komissar team": 17,
     "15x PPSh SMG team<br>1x Komissar team": 12,
 
@@ -90,6 +93,10 @@ const namedSoviet = {
     },
 
     "Reconnaissance by Combat": {
+        "Command Card Reconnaissance by Combat": 3
+    },
+
+    "Reconnaissance By Combat": {
         "Command Card Reconnaissance by Combat": 3
     },
 

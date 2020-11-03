@@ -10,7 +10,7 @@ const armouredFist = {
 
     "3x Humber (15mm)": 4,
 
-    "2x Daimler (2 pdr)": 4
+    "2x Daimler (2 pdr)<br>1x Dingo": 4
 }
 
 const fightingFirst = {
@@ -52,18 +52,18 @@ const namedArmouredFist = {
     },
 
     "Mailed Fist Armoured Car Squadron" : {
-        "3x Humber armoured cars from (MB115)": 5,
-        "4x Humber armoured cars from (MB115)": 6
+        "3x Humber armoured cars from (MB115)": 6,
+        "4x Humber armoured cars from (MB115)": 7
     },
 
     "Daimler Armoured Car Squadron" : {
-        "3x Humber armoured cars from (MB115)": 5,
-        "4x Humber armoured cars from (MB115)": 6
+        "3x Humber armoured cars from (MB115)": 6,
+        "4x Humber armoured cars from (MB115)": 7
     },
 
     "Humber Armoured Car Squadron" : {
-        "3x Humber armoured cars from (MB115)": 5,
-        "4x Humber armoured cars from (MB115)": 6
+        "3x Humber armoured cars from (MB115)": 6,
+        "4x Humber armoured cars from (MB115)": 7
     },
 
     "Artillery Expert": {

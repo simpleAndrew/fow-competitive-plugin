@@ -17,6 +17,7 @@ const afrikaKorps = {
     "1x Panzer III (uparmoured)": 7,
 
     "2x Sd Kfz 222 (2cm)<br>1x Sd Kfz 221 (MG)": 3,
+    "2x Sd Kfz 222 (2cm)<br>2x Sd Kfz 221 (MG)": 4,
 
     "3x Diana (7.62cm)": 12,
     "2x Diana (7.62cm)": 8,
@@ -66,7 +67,7 @@ const ghostPanzers = {
     "4x Panzer III (late 5cm)": 29,
     "3x Panzer III (late 5cm)": 22,
     "2x Panzer III (late 5cm)": 14,
-    "1x Panzer III (late 5cm)": 9,
+    "1x Panzer III (late 5cm)": 7,
 
     "5x Panther (7.5cm)": 70,
     "4x Panther (7.5cm)": 56,
@@ -104,7 +105,7 @@ const avanti = {
 
     "4x 47mm gun": 6,
     "3x 47mm gun": 4,
-    "2x 47mm gun": 2,
+    "2x 47mm gun": 3,
 
     "5x L6/40 (20mm)": 7,
     "4x L6/40 (20mm)": 5,
@@ -119,8 +120,11 @@ const avanti = {
 
 const namedGerman = {
     "Armoured Car Company": {
-        "1x Sd Kfz 221 (MG)" : 3
+        "1x Sd Kfz 221 (MG)" : 3,
+        "1x Sd Kfz 221 (MG) armoured car from (MG223)": 3,
+        "1x Luchs (2cm) tank from (MG258)": 4
     },
+
     "Captured 6 pdr Anti-tank (with 3 guns)" : {
         "Command Card Captured 6 pdr Anti-tank (with 3 guns)": -1
     },
