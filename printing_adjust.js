@@ -59,6 +59,7 @@ function overrideOptionPoints(divContainer) {
             let pointsContainer = choise.parentElement.querySelector('div[class="cssCP"]')
             let originalPoints = parseInt(pointsContainer.textContent)
             pointsContainer.innerHTML = points + "<sup>*</sup>"
+            pointsContainer.setAttribute("title", originalPoints + " by default")
             currentUnitDelta += points - originalPoints
         })
 }
@@ -92,6 +93,7 @@ function overrideAddOnPoints(divContainer) {
             + ((adjustedOptionPoints === 1 || adjustedOptionPoints === -1) ? "" : "s")
 
         container.innerHTML = originalHtml.replace(pointsText, newPointsText)
+        container.setAttribute("title", "\"" + pointsText + "\" by default")
 
         let factor = parts[5] ? parseInt(parts[5]) : 1
         currentUnitDelta += priceDelta * factor
@@ -103,6 +105,7 @@ function overrideUnitPoints() {
         let pointsDiv = currentUnit.querySelector('div[class="cssUPts"')
         let originalPoints = parseInt(pointsDiv.textContent)
         pointsDiv.innerHTML = (originalPoints + currentUnitDelta) + "<sup>*</sup>"
+        pointsDiv.setAttribute("title", originalPoints + " by default")
     }
     currentFormationDelta += currentUnitDelta
     currentUnitDelta = 0
@@ -115,6 +118,7 @@ function overrideFormation() {
         let pointsDiv = currentFormation.querySelector('div[class="cssPts"')
         let originalPoints = parseInt(pointsDiv.textContent)
         pointsDiv.innerHTML = (originalPoints + currentFormationDelta) + "<sup>*</sup>"
+        pointsDiv.setAttribute("title", originalPoints + " by default")
     }
     armyD += currentFormationDelta
     currentFormationDelta = 0
@@ -127,6 +131,7 @@ function overrideArmy(div) {
         let pointsDiv = div.lastChild
         let originalPoints = parseInt(pointsDiv.textContent.split(":")[1])
         pointsDiv.innerHTML = "Total Points:" + (originalPoints + armyD) + "<sup>*</sup>"
+        pointsDiv.setAttribute("title", originalPoints + " by default")
     }
 }
 

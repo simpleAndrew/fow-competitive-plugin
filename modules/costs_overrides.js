@@ -7,6 +7,7 @@ function overrideUnitCost(node) {
     if (delta !== 0 && originalPoints !== 0) {
         let currentPoints = originalPoints + delta
         node.innerHTML = "Unit: " + currentPoints + "<sup>*</sup>"
+        node.setAttribute("title", originalPoints + " by default")
     }
 }
 
@@ -17,6 +18,7 @@ function overrideFormationPoints(node) {
     if (delta !== 0 && originalPoints !== 0) {
         let currentPoints = originalPoints + delta
         node.innerHTML = "Formation: " + currentPoints + "<sup>*</sup>"
+        node.setAttribute("title", originalPoints + " by default")
     }
 }
 
@@ -26,6 +28,7 @@ function overrideArmyPoints(node) {
     if (delta !== 0 && originalPoints !== 0) {
         let currentPoints = originalPoints + delta
         node.innerHTML = "All: " + currentPoints + "<sup>*</sup>"
+        node.setAttribute("title", originalPoints + " by default")
     }
 }
 

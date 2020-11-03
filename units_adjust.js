@@ -19,6 +19,7 @@ function overrideUnitPoints() {
             let originalPoints = choise.lastElementChild.textContent.split(" POINT")[0]
             let delta = points - originalPoints
             choise.lastElementChild.innerHTML = points + "<sup>*</sup>" + " POINTS"
+            choise.lastElementChild.setAttribute("title", originalPoints + " by default")
             let newCost = document.createElement('p');
             newCost.textContent = delta;
             newCost.setAttribute("class", "points-delta")
@@ -59,6 +60,7 @@ function overrideUnitOptionPoints() {
             let adjustedText = originalText.replace(parsedPoints, newPointsText)
             let newDescription = document.createElement('span');
             newDescription.innerHTML = adjustedText;
+            newDescription.setAttribute("title", parsedPoints + " by default")
             div.parentNode.replaceChild(newDescription, div)
         }
     })
