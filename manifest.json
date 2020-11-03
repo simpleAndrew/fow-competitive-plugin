@@ -1,8 +1,9 @@
 {
   "name": "Flames Of War Competitive",
-  "version": "1.0",
+  "version": "0.1.3",
   "description": "Plugin for Forces FoW builder to replace point with competitive ones",
   "permissions": ["activeTab", "declarativeContent", "storage"],
+  "options_page": "html/options.html",
   "content_scripts": [
     {
       "matches": ["https://forces.flamesofwar.com/UnitDiagram/*"],
