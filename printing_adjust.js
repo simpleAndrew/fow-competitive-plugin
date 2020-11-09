@@ -67,9 +67,9 @@ function overrideOptionPoints(divContainer) {
 function overrideAddOnPoints(divContainer) {
     let container = divContainer.firstElementChild
 
-    let addOnRegexp = /(.+(([+-]\d+) points?).+)(\n&nbsp;\((\d+) selected\).*)?/
+    let addOnRegexp = /^(.+(([+-]\d+) points?).+?)(\n&nbsp;\((\d+) selected\).*)?$/
     let originalHtml = container.innerHTML
-    let parts = addOnRegexp.exec(container.textContent.trim())
+    let parts = addOnRegexp.exec(originalHtml.trim())
 
     if (!parts) {
         let cardsSelectedRegexp = /.*Total cards:\n&nbsp;\((\d+) selected\)/
