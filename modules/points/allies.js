@@ -10,11 +10,36 @@ const armouredFist = {
 
     "3x Humber (15mm)": 4,
 
-    "2x Daimler (2 pdr)<br>1x Dingo": 4
+    "2x Daimler (2 pdr)<br>1x Dingo": 4,
+
+    "3-inch mortar platoon" : {
+    "6x 3-inch mortar": 7,
+    "4x 3-inch mortar": 5,
+    "2x 3-inch mortar": 3
+    },
+
+    "Parachute 3-inch mortar platoon" : {
+    "6x 3-inch mortar": 7,
+    "4x 3-inch mortar": 5,
+    "2x 3-inch mortar": 3
+    },
+
+    "Airlanding 6 pdr anti-tank platoon" : {
+    "4x 6 pdr gun": 13,
+    "2x 6 pdr gun": 7,
+    },
+
+    "4x 75mm pack howitzer": 8,
+    "2x 75mm pack howitzer": 4,
+
+    "Commando Vickers MMG section" : {
+    "3x Vickers MMG ": 7
+    },
+    "3x 3-inch mortar": 5
 }
 
 const fightingFirst = {
-    "5x M4 Sherman (75mm)": 32,
+    "5x M4 Sherman (75mm)": 31,
     "4x M4 Sherman (75mm)": 25,
     "3x M4 Sherman (75mm)": 18,
     "2x M4 Sherman (75mm)": 13,
@@ -26,14 +51,18 @@ const fightingFirst = {
     "6x M7 Priest (105mm)": 18,
     "3x M7 Priest (105mm)": 9,
 
-    "4x M10 (3-inch)":28,
-    "3x M10 (3-inch)":21,
-    "2x M10 (3-inch)":14,
+    "4x M10 (3-inch)":26,
+    "3x M10 (3-inch)":20,
+    "2x M10 (3-inch)":13,
 
     "3x M4 (81mm mortar)": 3,
 
     "3x T30 (75mm)": 4,
-    "2x T30 (75mm)": 3
+    "2x T30 (75mm)": 3,
+    "4x 75mm pack howitzer": 8,
+    "2x 75mm pack howitzer": 4,
+    "4x 105mm howitzer": 8,
+    "2x 105mm howitzer": 4
 }
 
 const namedFightingFirst = {
@@ -74,3 +103,4 @@ const namedArmouredFist = {
         "Command Card Scout Tanks": 3
     }
 }
+
