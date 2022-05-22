@@ -182,12 +182,6 @@ const avanti = {
     "5x Breda MG & Carcano rifle team<br>2x Brixia mortar team<br>2x Flame-thrower team": 12,
     "3x Breda MG & Carcano rifle team<br>1x Brixia mortar team<br>1x Flame-thrower team": 6,
 
-    "47mm anti-tank platoon" : {
-    "4x 47mm gun": 6,
-    "3x 47mm gun": 4,
-    "2x 47mm gun": 3
-    },
-
     "5x L6/40 (20mm)": 7,
     "4x L6/40 (20mm)": 5,
     "3x L6/40 (20mm)": 4,
@@ -196,13 +190,7 @@ const avanti = {
     "3x AB41 (20mm)": 3,
 
     "4x 100mm howitzer": 10,
-    "2x 100mm howitzer": 5
-
-    "Parachutist 47mm anti-tank platoon" : {
-    "4x 47mm gun": 6,
-    "3x 47mm gun": 4,
-    "2x 47mm gun": 3
-    },
+    "2x 100mm howitzer": 5,
 
 }
 
@@ -214,7 +202,7 @@ const whiteDeath = {
     "2x 81mm mortar": 3,
 
     "2x 3.7cm gun": 4,
-    "2x 3.7cm (Stielgranate) gun": 5,
+    "3x 3.7cm gun": 5,
 
     "2x 45mm gun": 5,
 
@@ -279,19 +267,19 @@ const braveRomania = {
     "2x 50mm gun": 6,
 
     "2x AB (2cm)<br>1x AB (MG)": 3
-    }
+}
 
 const namedGerman = {
     "Armoured Car Company": {
-        "1x Sd Kfz 221 (MG)" : 3,
+        "1x Sd Kfz 221 (MG)": 3,
         "1x Sd Kfz 221 (MG) armoured car from (MG223)": 3,
         "1x Luchs (2cm) tank from (MG258)": 4
     },
 
-    "Captured 6 pdr Anti-tank (with 3 guns)" : {
+    "Captured 6 pdr Anti-tank (with 3 guns)": {
         "Command Card Captured 6 pdr Anti-tank (with 3 guns)": -1
     },
-    "Captured 6 pdr Anti-tank (with 2 guns)" : {
+    "Captured 6 pdr Anti-tank (with 2 guns)": {
         "Command Card Captured 6 pdr Anti-tank (with 2 guns)": -1
     },
     "Armoured FlaK Half-tracks": {
@@ -300,6 +288,18 @@ const namedGerman = {
 }
 
 const namedItalian = {
+
+
+    "Parachutist 47mm anti-tank platoon": {
+        "4x 47mm gun": 6,
+        "3x 47mm gun": 4,
+        "2x 47mm gun": 3
+    },
+    "47mm anti-tank platoon": {
+        "4x 47mm gun": 6,
+        "3x 47mm gun": 4,
+        "2x 47mm gun": 3
+    },
 
     "Tactical Brilliance": {
         "Command Card Tactical Brilliance": 3
@@ -321,7 +321,7 @@ const namedItalian = {
 }
 
 const italianNamedFormationOverrides = {
-    "L6/40 Light Tank Company Command Card" : {
+    "L6/40 Light Tank Company Command Card": {
         "L6/40 Light Tank Company HQ": {
             "4x L6/40 (20mm)": 8,
             "3x L6/40 (20mm)": 6,

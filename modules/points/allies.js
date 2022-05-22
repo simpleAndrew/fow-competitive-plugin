@@ -12,29 +12,9 @@ const armouredFist = {
 
     "2x Daimler (2 pdr)<br>1x Dingo": 4,
 
-    "3-inch mortar platoon" : {
-    "6x 3-inch mortar": 7,
-    "4x 3-inch mortar": 5,
-    "2x 3-inch mortar": 3
-    },
-
-    "Parachute 3-inch mortar platoon" : {
-    "6x 3-inch mortar": 7,
-    "4x 3-inch mortar": 5,
-    "2x 3-inch mortar": 3
-    },
-
-    "Airlanding 6 pdr anti-tank platoon" : {
-    "4x 6 pdr gun": 13,
-    "2x 6 pdr gun": 7,
-    },
-
     "4x 75mm pack howitzer": 8,
     "2x 75mm pack howitzer": 4,
 
-    "Commando Vickers MMG section" : {
-    "3x Vickers MMG ": 7
-    },
     "3x 3-inch mortar": 5
 }
 
@@ -51,9 +31,9 @@ const fightingFirst = {
     "6x M7 Priest (105mm)": 18,
     "3x M7 Priest (105mm)": 9,
 
-    "4x M10 (3-inch)":26,
-    "3x M10 (3-inch)":20,
-    "2x M10 (3-inch)":13,
+    "4x M10 (3-inch)": 26,
+    "3x M10 (3-inch)": 20,
+    "2x M10 (3-inch)": 13,
 
     "3x M4 (81mm mortar)": 3,
 
@@ -72,25 +52,44 @@ const namedFightingFirst = {
 }
 
 const namedArmouredFist = {
-    "New Zealand Divisional Cavalry" : {
-        "2x Honey from (MB107)" : 5
+    "3-inch mortar platoon": {
+        "6x 3-inch mortar": 7,
+        "4x 3-inch mortar": 5,
+        "2x 3-inch mortar": 3
     },
 
-    "Australian Divisional Cavalry" : {
+    "Parachute 3-inch mortar platoon": {
+        "6x 3-inch mortar": 7,
+        "4x 3-inch mortar": 5,
+        "2x 3-inch mortar": 3
+    },
+
+    "Airlanding 6 pdr anti-tank platoon": {
+        "4x 6 pdr gun": 13,
+        "2x 6 pdr gun": 7,
+    },
+    "Commando Vickers MMG section": {
+        "3x Vickers MMG ": 7
+    },
+    "New Zealand Divisional Cavalry": {
+        "2x Honey from (MB107)": 5
+    },
+
+    "Australian Divisional Cavalry": {
         "2x Crusader II from (MB104)": 5
     },
 
-    "Mailed Fist Armoured Car Squadron" : {
+    "Mailed Fist Armoured Car Squadron": {
         "3x Humber armoured cars from (MB115)": 6,
         "4x Humber armoured cars from (MB115)": 7
     },
 
-    "Daimler Armoured Car Squadron" : {
+    "Daimler Armoured Car Squadron": {
         "3x Humber armoured cars from (MB115)": 6,
         "4x Humber armoured cars from (MB115)": 7
     },
 
-    "Humber Armoured Car Squadron" : {
+    "Humber Armoured Car Squadron": {
         "3x Humber armoured cars from (MB115)": 6,
         "4x Humber armoured cars from (MB115)": 7
     },
@@ -99,7 +98,7 @@ const namedArmouredFist = {
         "Command Card Artillery Expert": 2
     },
 
-    "Scout Tanks" : {
+    "Scout Tanks": {
         "Command Card Scout Tanks": 3
     }
 }
