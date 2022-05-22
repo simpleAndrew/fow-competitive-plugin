@@ -1,5 +1,16 @@
 
-const adjustedPrices = _.merge(afrikaKorps, armouredFist, ironCross, ghostPanzers, avanti, enemyAtTheGates, redBanner, fightingFirst)
+const adjustedPrices = _.merge(
+    afrikaKorps,
+    ironCross,
+    braveRomania,
+    ghostPanzers,
+    avanti,
+    hungarianSteel,
+    whiteDeath,
+    enemyAtTheGates,
+    redBanner,
+    fightingFirst,
+    armouredFist)
 
 const namedUnitsOverrides = _.merge(namedSoviet, namedArmouredFist, namedGerman, namedFightingFirst, namedItalian)
 
