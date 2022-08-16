@@ -28,7 +28,6 @@ const enemyAtTheGates = {
 
 const redBanner = {
 
-
     "4x SU-85 (85mm)": 29,
     "3x SU-85 (85mm)": 22,
     "2x SU-85 (85mm)": 15,

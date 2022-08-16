@@ -201,14 +201,10 @@ const whiteDeath = {
     "3x 81mm mortar": 4,
     "2x 81mm mortar": 3,
 
-    "2x 3.7cm gun": 4,
-    "3x 3.7cm gun": 5,
+    "2x 37mm gun": 4,
+    "2x 37mm gun (Stielgranate)": 5,
 
     "2x 45mm gun": 5,
-
-    "4x 3.7cm (Stielgranate) gun": 9,
-    "3x 3.7cm (Stielgranate) gun": 7,
-    "2x 3.7cm (Stielgranate) gun": 4,
 
     "3x BT-42 (114mm)": 10,
     "2x BT-42 (114mm)": 7,
