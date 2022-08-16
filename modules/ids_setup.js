@@ -30,7 +30,10 @@ function isFormationSupported(formation) {
     let formId = formationRegex.exec(formation)[1]
     if(formId) {
         let formNum = parseInt(formId)
-        return formNum < 200
+        console.log("Identified formation ID:" + formNum)
+        let isFormationAdjusted = formNum < 200 || (formNum => 530 && formNum <= 550);
+        console.log("Is Formation going to be adjusted: " + isFormationAdjusted)
+        return isFormationAdjusted
     } else {
         return false
     }
