@@ -1,5 +1,10 @@
-printInitIds()
-
+let currentFormation = null
+let currentFormationName = null
+let currentUnit = null
+let currentUnitName = null
+let currentFormationDelta = 0
+let currentUnitDelta = 0
+let armyD = 0
 
 function fixTheBrokenCards() {
     const fixes = {
@@ -18,15 +23,10 @@ function fixTheBrokenCards() {
         })
 }
 
-fixTheBrokenCards()
-
-let currentFormation = null
-let currentFormationName = null
-let currentUnit = null
-let currentUnitName = null
-let currentFormationDelta = 0
-let currentUnitDelta = 0
-let armyD = 0
+function logStatLine() {
+    log("Formation:" + currentFormationName + "; Unit: " + currentUnitName +
+        "; Deltas: Army[" + armyD + "], Formation[" + currentFormationDelta + "], Unit[" + currentUnitDelta + "]")
+}
 
 function isFormationDiv(div) {
     return div.querySelector('div[class="cssFrm"');
@@ -61,6 +61,9 @@ function overrideOptionPoints(divContainer) {
             pointsContainer.innerHTML = points + "<sup>*</sup>"
             pointsContainer.setAttribute("title", originalPoints + " by default")
             currentUnitDelta += points - originalPoints
+            log("Points: original[" + originalPoints +
+                "]; adjusted[" + points + "]; delta[" + (points - originalPoints) + "]")
+            logStatLine()
         })
 }
 
@@ -84,10 +87,17 @@ function overrideAddOnPoints(divContainer) {
     let optionText = parts[1]
 
     let adjustedOptionPoints = getAdjustedOptionPoints(optionText);
+
+    log("Adjusted addon: " + optionText + "; adjusted point cost: " + adjustedOptionPoints )
     if (adjustedOptionPoints !== undefined && adjustedOptionPoints !== 0) {
         let pointsText = parts[2]
         let pointsVal = parts[3]
+        log("Addon original points: " + pointsVal)
+
         let priceDelta = adjustedOptionPoints - parseInt(pointsVal)
+
+        log("Addon points delta:" + priceDelta)
+
         let newPointsText = (adjustedOptionPoints > 0 ? "+" : "")
             + adjustedOptionPoints + "<sup>*</sup> point"
             + ((adjustedOptionPoints === 1 || adjustedOptionPoints === -1) ? "" : "s")
@@ -96,7 +106,11 @@ function overrideAddOnPoints(divContainer) {
         container.setAttribute("title", "\"" + pointsText + "\" by default")
 
         let factor = parts[5] ? parseInt(parts[5]) : 1
+
+        log("Addons selected count: " + factor)
+
         currentUnitDelta += priceDelta * factor
+        logStatLine()
     }
 }
 
@@ -106,6 +120,10 @@ function overrideUnitPoints() {
         let originalPoints = parseInt(pointsDiv.textContent)
         pointsDiv.innerHTML = (originalPoints + currentUnitDelta) + "<sup>*</sup>"
         pointsDiv.setAttribute("title", originalPoints + " by default")
+        log("Original Unit Points: " + originalPoints)
+    } else if(currentUnit) {
+        log("Unit handling done")
+        logStatLine()
     }
     currentFormationDelta += currentUnitDelta
     currentUnitDelta = 0
@@ -119,6 +137,10 @@ function overrideFormation() {
         let originalPoints = parseInt(pointsDiv.textContent)
         pointsDiv.innerHTML = (originalPoints + currentFormationDelta) + "<sup>*</sup>"
         pointsDiv.setAttribute("title", originalPoints + " by default")
+        log("Original Formation Points: " + originalPoints)
+    } else if (currentFormation) {
+        log("Formation handling done")
+        logStatLine()
     }
     armyD += currentFormationDelta
     currentFormationDelta = 0
@@ -132,36 +154,8 @@ function overrideArmy(div) {
         let originalPoints = parseInt(pointsDiv.textContent.split(":")[1])
         pointsDiv.innerHTML = "Total Points:" + (originalPoints + armyD) + "<sup>*</sup>"
         pointsDiv.setAttribute("title", originalPoints + " by default")
-    }
-}
-
-
-if (isFormationSupported(formationId)) {
-    let armyDivs = document.querySelectorAll('div[class="cssReport"] div')
-
-    armyDivs.forEach(currentDiv => {
-        if (isFormationDiv(currentDiv)) {
-            overrideUnitPoints()
-            overrideFormation()
-            currentFormation = currentDiv
-            currentFormationName = currentDiv.firstElementChild.textContent
-        } else if (isUnitDiv(currentDiv)) {
-            overrideUnitPoints()
-            currentUnit = currentDiv
-            currentUnitName = currentDiv.firstElementChild.textContent
-        } else if (isUnitOptionDiv(currentDiv)) {
-            overrideOptionPoints(currentDiv)
-        } else if (isUnitAddonDiv(currentDiv)) {
-            overrideAddOnPoints(currentDiv)
-        } else if (isArmyDiv(currentDiv)) {
-            overrideUnitPoints()
-            overrideFormation()
-            overrideArmy(currentDiv)
-        }
-    })
-
-    if(armyD !== 0) {
-        let titleDiv = document.querySelector('div[class="cssTitle"]')
-        titleDiv.innerHTML += "<sup>*</sup> (Competitive Points)"
+        log("Original Army Points: " + originalPoints)
+        log("Army handling done")
+        logStatLine()
     }
 }

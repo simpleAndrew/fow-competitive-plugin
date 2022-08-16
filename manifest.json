@@ -9,16 +9,18 @@
       "matches": ["https://forces.flamesofwar.com/UnitDiagram/*"],
       "run_at": "document_end",
       "js": [
-        "modules/lodash.js",
-        "modules/points/cards.js",
-        "modules/points/allies.js",
-        "modules/points/axis.js",
-        "modules/points/soviets.js",
-        "modules/adjusted_points.js",
-        "modules/utils_setup.js",
-        "modules/ids_setup.js",
-        "modules/costs_overrides.js",
-        "units_adjust.js"
+        "modules/common/lodash.js",
+        "modules/common/logging.js",
+        "modules/common/utils_setup.js",
+        "modules/common/ids_init.js",
+        "modules/data/cards.js",
+        "modules/data/allies.js",
+        "modules/data/axis.js",
+        "modules/data/soviets.js",
+        "modules/data/adjusted_points.js",
+        "modules/storage/points_storage.js",
+        "modules/unit/units_taxonomy.js",
+        "modules/unit/units_init.js"
       ]
     },
     {
@@ -27,32 +29,35 @@
       "run_at": "document_end",
       "css": ["modules/overrides.css"],
       "js": [
-        "modules/lodash.js",
-        "modules/points/cards.js",
-        "modules/points/allies.js",
-        "modules/points/axis.js",
-        "modules/points/soviets.js",
-        "modules/adjusted_points.js",
-        "modules/utils_setup.js",
-        "modules/ids_setup.js",
-        "modules/costs_overrides.js",
-        "forces_adjust.js"
+        "modules/common/lodash.js",
+        "modules/common/logging.js",
+        "modules/common/utils_setup.js",
+        "modules/common/ids_init.js",
+        "modules/data/cards.js",
+        "modules/data/allies.js",
+        "modules/data/axis.js",
+        "modules/data/soviets.js",
+        "modules/data/adjusted_points.js",
+        "modules/storage/points_storage.js",
+        "modules/force/forces_init.js"
       ]
     },
     {
       "matches": ["https://forces.flamesofwar.com/ForceDiagram/Print/*"],
       "run_at": "document_end",
       "js": [
-        "modules/lodash.js",
-        "modules/points/cards.js",
-        "modules/points/allies.js",
-        "modules/points/axis.js",
-        "modules/points/soviets.js",
-        "modules/adjusted_points.js",
-        "modules/utils_setup.js",
-        "modules/ids_setup.js",
-        "modules/costs_overrides.js",
-        "printing_adjust.js"
+        "modules/common/lodash.js",
+        "modules/common/logging.js",
+        "modules/common/utils_setup.js",
+        "modules/common/ids_init.js",
+        "modules/data/cards.js",
+        "modules/data/allies.js",
+        "modules/data/axis.js",
+        "modules/data/soviets.js",
+        "modules/data/adjusted_points.js",
+        "modules/storage/points_storage.js",
+        "modules/printing/printing_taxonomy.js",
+        "modules/printing/printing_init.js"
       ]
     }
   ],

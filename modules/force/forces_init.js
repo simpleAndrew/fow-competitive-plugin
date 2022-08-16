@@ -1,9 +1,5 @@
 forceInitIds()
 
-
-
-
-
 function overrideStoredFormationCosts() {
     const pointsRegexp = /Modify \((\d+) .+/
     let formationLinks = document.querySelectorAll('div[tabindex="-1"] div[style="float:left;"] a')
