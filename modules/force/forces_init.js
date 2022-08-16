@@ -10,23 +10,17 @@ function overrideStoredFormationCosts() {
         let parts = storedLink.href.split("/")
         let formation = parts[parts.length - 2] + "-" + parts[parts.length - 1]
         let delta = formationDelta(formation)
+        log("Points override: formation: " + formation)
         if (delta !== 0) {
             let overridenPoints = currentPoints + delta
+            log("Overriding original points: " + currentPoints + "; overridden: " + overridenPoints)
             storedLink.innerHTML = "Modify (" + overridenPoints + "<sup>*</sup> points)"
         }
     });
 }
 
 if (isFormationSupported(formationId)) {
-    chrome.storage.local.get(armyId, function (storedArmyPoints) {
-        if (storedArmyPoints) {
-            armyPoints = storedArmyPoints
-            let nodes = document.querySelectorAll('div[class="cssPtLine"] div')
-            overrideFormationPoints(nodes[1])
-            overrideArmyPoints(nodes[2])
-            overrideStoredFormationCosts()
-        }
-    })
+    readForcePointsFromStorage(overrideStoredFormationCosts)
 
     let resetForce = document.querySelector('li[id="ucHeader_hclear"] a')
 
