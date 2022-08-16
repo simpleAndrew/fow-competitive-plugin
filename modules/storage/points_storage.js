@@ -61,7 +61,6 @@ function clearFormationDelta(armyId, formationId) {
 }
 
 function clearArmyDelta(armyId) {
-    // delete ((armyPoints[armyId] || {})[formationId] || {})[unitId]
     chrome.storage.local.remove(armyId)
 }
 
@@ -90,10 +89,13 @@ function readForcePointsFromStorage(callback) {
             overrideFormationPoints(nodes[1])
             overrideArmyPoints(nodes[2])
             callback()
-        } else {
-            log("No stored points found")
+            logArmyPoints()
         }
     })
+}
+
+function logArmyPoints() {
+    log("-------------------\n" + JSON.stringify(armyPoints, null, "\t") + "-------------------\n")
 }
 
 function readUnitPointsFromStorage() {
@@ -105,6 +107,7 @@ function readUnitPointsFromStorage() {
             overrideUnitCost(nodes[1])
             overrideFormationPoints(nodes[2])
             overrideArmyPoints(nodes[3])
+            logArmyPoints()
         }
     })
 }
