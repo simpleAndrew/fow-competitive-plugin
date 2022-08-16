@@ -7,6 +7,8 @@ if (isFormationSupported(formationId)) {
 
     overrideUnitOptionPoints()
 
+    overrideComplexCardPoints()
+
     readUnitPointsFromStorage()
 
     initStoredDelta()

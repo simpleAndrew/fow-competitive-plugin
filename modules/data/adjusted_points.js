@@ -40,3 +40,7 @@ function getAdjustedOptionPoints(additionalOptionPrice) {
     let trimmedName = additionalOptionPrice.trim()
     return adjustedOptionPrices[trimmedName];
 }
+
+function getPotentialComplexOptions(unitName) {
+    return customSelectionOptions[unitName]
+}

@@ -7,7 +7,7 @@ const adjustedOptionPrices = {
 
     //ghost panzers
     "Replace up to one Panzer IV (late 7.5cm) with Panzer III (late 7.5cm) for -4 points.": -1,
-    "Replace up to two Panzer III (late 5cm) with Panzer IV (late 7.5cm) for +5 points each." : 2,
+    "Replace up to two Panzer III (late 5cm) with Panzer IV (late 7.5cm) for +5 points each.": 2,
     "Replace any or all StuG (long 7.5cm) assault guns with StuG (late 7.5cm) (MG251) for +4 points per tank.": 3,
 
     //red banner
@@ -16,4 +16,19 @@ const adjustedOptionPrices = {
     //avanti
     "Command Card Captured 6 pdr Anti-tank (with 3 guns)": -1,
     "Command Card Captured 6 pdr Anti-tank (with 2 guns)": -1
+}
+
+const customSelectionOptions = {
+    "Captured 25 pdr Artillery": {
+        "+1 point for a unit of 2 guns": 1,
+        "+2 points for 4 guns": 2
+    },
+    "Always Prepared": {
+        "-1 point for a big unit (10 rifle teams & extras)": 0,
+        "-1 point for a small unit (7 rifle teams & extras)": -1
+    },
+    "Regulars, By God!": {
+        "0 points for a small unit (6 rifle teams & others)": 0,
+        "-2 points for a small unit (4 rifle teams & others)": -2
+    }
 }

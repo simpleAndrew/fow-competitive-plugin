@@ -64,6 +64,41 @@ function overrideUnitOptionPoints() {
     })
 }
 
+function overrideComplexCardPoints() {
+    let overrides = getPotentialComplexOptions(unitName)
+    if (!overrides) {
+        log("Have no complex overrides")
+        return;
+    }
+
+    log(unitName + " has complex overrides: " + JSON.stringify(overrides))
+
+    let customOptionsContainer = document.createElement("div")
+    customOptionsContainer.className = "Options ORaw"
+    let maxOfSelectedOptions = Math.max(...document.querySelectorAll('div[class="cssQty"] select option')
+        .map(opt => {
+                return parseInt(opt.value)
+            }
+        )
+    )
+
+    for (elmnt in overrides) {
+        let newOption = document.createElement('ul');
+        let selectionUnits = '<li>' + elmnt + '</li><div class="cssQty custom-option" name="' + elmnt + '"><select name="'+elmnt+'"  delta="'+overrides[elmnt] +'"><option value="0" selected>0 units</option><option value="1">1 unit</option>'
+        const end ='<li/></select></div>'
+        for(let i =2; i <= maxOfSelectedOptions; i++) {
+            selectionUnits += '<option value="' + i + '">' + i + ' units</option>'
+        }
+        newOption.innerHTML = selectionUnits + end
+        customOptionsContainer.append(newOption)
+    }
+
+    let optionsStart = document.querySelector('div[class="Options ORaw"]')
+    optionsStart.parentNode.insertBefore(customOptionsContainer, optionsStart)
+
+    log("Options are added")
+}
+
 function calculateOptionsDelta() {
 
     let checkedBoxes = document.querySelectorAll('div[class="Options"] input[type="checkbox"]')
@@ -85,6 +120,18 @@ function calculateOptionsDelta() {
     return finalSum
 }
 
+function calculateCustomOptionsDelta() {
+    let finalSum = 0
+    document.querySelectorAll('div[class="cssQty custom-option"] select').forEach(opt => {
+        let costDelta = parseInt(opt.attributes.getNamedItem("delta").value)
+        log("delta: " + costDelta)
+        let multiplier = opt.selectedOptions[0].value
+        log("custom option delta " + opt.name +": " + (costDelta * multiplier))
+        finalSum += costDelta * multiplier
+    })
+    return finalSum
+}
+
 function initStoredDelta() {
     let radioBtn = document.querySelector('input[id="Choice"][checked="checked"][type="radio"]')
     if (radioBtn) {
@@ -96,7 +143,7 @@ function initStoredDelta() {
 function setupSumbissionListeners() {
     let saveBtn = document.querySelector('button[id="btnSave"]')
     saveBtn.addEventListener("click", function (e) {
-        let extraD = calculateOptionsDelta()
+        let extraD = calculateOptionsDelta() + calculateCustomOptionsDelta()
         let multiplier = detectDeltaMultiplier()
         storeDelta(armyId, formationId, unitId, delta * multiplier + extraD)
     })
