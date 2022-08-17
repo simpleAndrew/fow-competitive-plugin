@@ -82,12 +82,17 @@ function overrideComplexCardPoints() {
         )
     )
 
+    let persistedOptions = getCustomOptions(armyId, formationId, unitId)
+
     for (elmnt in overrides) {
         let newOption = document.createElement('ul');
-        let selectionUnits = '<li>' + elmnt + '</li><div class="cssQty custom-option" name="' + elmnt + '"><select name="'+elmnt+'"  delta="'+overrides[elmnt] +'"><option value="0" selected>0 units</option><option value="1">1 unit</option>'
-        const end ='<li/></select></div>'
-        for(let i =2; i <= maxOfSelectedOptions; i++) {
-            selectionUnits += '<option value="' + i + '">' + i + ' units</option>'
+        let selectedOption = parseInt(persistedOptions[elmnt] || "0")
+        let selectionUnits = '<li>' + elmnt + '</li><div class="cssQty custom-option" name="' + elmnt + '"><select name="' + elmnt + '"  delta="' + overrides[elmnt] + '">'
+        const end = '<li/></select></div>'
+        for (let i = 0; i <= maxOfSelectedOptions; i++) {
+            let selectedBlock = i === selectedOption ? " selected " : ""
+            let unitWord = i === 1 ? " unit":" units"
+            selectionUnits += '<option value="' + i + '" ' + selectedBlock + '>' + i + unitWord + '</option>'
         }
         newOption.innerHTML = selectionUnits + end
         customOptionsContainer.append(newOption)
@@ -126,7 +131,7 @@ function calculateCustomOptionsDelta() {
         let costDelta = parseInt(opt.attributes.getNamedItem("delta").value)
         log("delta: " + costDelta)
         let multiplier = opt.selectedOptions[0].value
-        log("custom option delta " + opt.name +": " + (costDelta * multiplier))
+        log("custom option delta " + opt.name + ": " + (costDelta * multiplier))
         finalSum += costDelta * multiplier
     })
     return finalSum
@@ -145,6 +150,7 @@ function setupSumbissionListeners() {
     saveBtn.addEventListener("click", function (e) {
         let extraD = calculateOptionsDelta() + calculateCustomOptionsDelta()
         let multiplier = detectDeltaMultiplier()
+        storeCustomSelection()
         storeDelta(armyId, formationId, unitId, delta * multiplier + extraD)
     })
 
@@ -152,6 +158,18 @@ function setupSumbissionListeners() {
     clearBtn.addEventListener("click", function () {
         clearUnitDelta(armyId, formationId, unitId)
     })
+}
+
+function storeCustomSelection() {
+    document.querySelectorAll('div[class="cssQty custom-option"] select').forEach(opt => {
+            let optionName = opt.name
+            let selectedCount = opt.selectedOptions[0].value
+
+            log("storing option  " + optionName + ": " + selectedCount)
+
+            storeCustomOptions(armyId, formationId, unitId, {[optionName]: selectedCount})
+        }
+    )
 }
 
 function detectDeltaMultiplier() {

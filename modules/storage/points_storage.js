@@ -1,8 +1,11 @@
+const points_field = "value"
+const custom_field = "custom"
+
 let armyPoints = {}
 
 function overrideUnitCost(node) {
-    let delta = ((armyPoints[armyId] || {})[formationId] || {})[unitId] || 0
-    log("Point override for formation " + unitId + " in formation " + formationId + ": " + delta)
+    let delta = (((armyPoints[armyId] || {})[formationId] || {})[unitId] || {})[points_field] || 0
+    log("Point override for unit " + unitId + " in formation " + formationId + ": " + delta)
     let originalPoints = parseInt(node.textContent.split(":")[1])
     if (delta !== 0) {
         let currentPoints = originalPoints + delta
@@ -42,10 +45,10 @@ function armyDelta() {
 }
 
 function formationDelta(frmId) {
-    let modifier = (armyPoints[armyId] || {})[frmId] || {}
+    let units = (armyPoints[armyId] || {})[frmId] || {}
     let delta = 0
-    for (const [_, value] of Object.entries(modifier)) {
-        delta += value
+    for (unitData in units) {
+        delta += (units[unitData] || {})[points_field] || 0
     }
     return delta;
 }
@@ -69,7 +72,7 @@ function storeDelta(armyId, formationId, unitId, delta) {
     let currentDelta = {}
     let formationPoints = {}
 
-    formationPoints[unitId] = parseInt(delta)
+    formationPoints[unitId] = {[points_field] : parseInt(delta)}
 
     currentDelta[formationId] = formationPoints
 
@@ -78,6 +81,26 @@ function storeDelta(armyId, formationId, unitId, delta) {
     let mergedPoints = _.merge(armyPoints, data)
 
     chrome.storage.local.set(mergedPoints)
+}
+
+function storeCustomOptions(armyId, formationId, unitId, options) {
+    let data = {}
+    let currentDelta = {}
+    let formationPoints = {}
+
+    formationPoints[unitId] = {[custom_field] : options}
+
+    currentDelta[formationId] = formationPoints
+
+    data[armyId] = currentDelta
+
+    let mergedPoints = _.merge(armyPoints, data)
+
+    chrome.storage.local.set(mergedPoints)
+}
+
+function getCustomOptions(armyId, formationId, unitId) {
+    return (((armyPoints[armyId] || {})[formationId] || {})[unitId] || {})[custom_field] || {}
 }
 
 function readForcePointsFromStorage(callback) {
@@ -98,7 +121,7 @@ function logArmyPoints() {
     log("-------------------\n" + JSON.stringify(armyPoints, null, "\t") + "-------------------\n")
 }
 
-function readUnitPointsFromStorage() {
+function readUnitPointsFromStorage(callback) {
     log("Reading stored point values for army ID: " + armyId)
     chrome.storage.local.get(armyId, function (storedArmyPoints) {
         if (storedArmyPoints) {
@@ -107,6 +130,7 @@ function readUnitPointsFromStorage() {
             overrideUnitCost(nodes[1])
             overrideFormationPoints(nodes[2])
             overrideArmyPoints(nodes[3])
+            callback()
             logArmyPoints()
         }
     })
