@@ -72,7 +72,7 @@ function storeDelta(armyId, formationId, unitId, delta) {
     let currentDelta = {}
     let formationPoints = {}
 
-    formationPoints[unitId] = {[points_field] : parseInt(delta)}
+    formationPoints[unitId] = {[points_field]: parseInt(delta)}
 
     currentDelta[formationId] = formationPoints
 
@@ -88,7 +88,7 @@ function storeCustomOptions(armyId, formationId, unitId, options) {
     let currentDelta = {}
     let formationPoints = {}
 
-    formationPoints[unitId] = {[custom_field] : options}
+    formationPoints[unitId] = {[custom_field]: options}
 
     currentDelta[formationId] = formationPoints
 
@@ -103,17 +103,21 @@ function getCustomOptions(armyId, formationId, unitId) {
     return (((armyPoints[armyId] || {})[formationId] || {})[unitId] || {})[custom_field] || {}
 }
 
+function getCustomOptionValue(armyId, optionName) {
+    return (_.flatMap(armyPoints[armyId], f => _.flatMap(f))
+        .filter(a => a)
+        .filter(e => e[custom_field])
+        .map(e => e[custom_field])[0] || {})[optionName]
+
+}
+
 function readForcePointsFromStorage(callback) {
-    log("Reading stored point values for army ID: " + armyId)
-    chrome.storage.local.get(armyId, function (storedArmyPoints) {
-        if (storedArmyPoints) {
-            armyPoints = storedArmyPoints
-            let nodes = document.querySelectorAll('div[class="cssPtLine"] div')
-            overrideFormationPoints(nodes[1])
-            overrideArmyPoints(nodes[2])
-            callback()
-            logArmyPoints()
-        }
+    initArmyPoints(_ => {
+        let nodes = document.querySelectorAll('div[class="cssPtLine"] div')
+        overrideFormationPoints(nodes[1])
+        overrideArmyPoints(nodes[2])
+        callback()
+        logArmyPoints()
     })
 }
 
@@ -122,14 +126,21 @@ function logArmyPoints() {
 }
 
 function readUnitPointsFromStorage(callback) {
+    initArmyPoints(_ => {
+        let nodes = document.querySelectorAll('div[class="cssPtLine"] div')
+        overrideUnitCost(nodes[1])
+        overrideFormationPoints(nodes[2])
+        overrideArmyPoints(nodes[3])
+        callback()
+    })
+}
+
+function initArmyPoints(callback) {
     log("Reading stored point values for army ID: " + armyId)
     chrome.storage.local.get(armyId, function (storedArmyPoints) {
         if (storedArmyPoints) {
+            log("Stored point values are read; army ID: " + armyId)
             armyPoints = storedArmyPoints
-            let nodes = document.querySelectorAll('div[class="cssPtLine"] div')
-            overrideUnitCost(nodes[1])
-            overrideFormationPoints(nodes[2])
-            overrideArmyPoints(nodes[3])
             callback()
             logArmyPoints()
         }

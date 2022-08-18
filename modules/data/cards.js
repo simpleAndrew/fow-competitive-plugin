@@ -15,13 +15,13 @@ const adjustedOptionPrices = {
 
     //avanti
     "Command Card Captured 6 pdr Anti-tank (with 3 guns)": -1,
-    "Command Card Captured 6 pdr Anti-tank (with 2 guns)": -1
+    "Command Card Captured 6 pdr Anti-tank (with 2 guns)": -1,
 }
 
 const customSelectionOptions = {
     "Captured 25 pdr Artillery": {
-        "+1 point for a unit of 2 guns": 1,
-        "+2 points for 4 guns": 2
+        "Add +1 point for a unit of 2 guns": 1,
+        "Add +2 points for a unit of 4 guns": 2
     },
     "Always Prepared": {
         "-1 point for a big unit (10 rifle teams & extras)": 0,

@@ -27,7 +27,7 @@ function overrideUnitPoints() {
 }
 
 function overrideUnitOptionPoints() {
-    let pointsRegexp = /.+(([\+-]\d+) points?).*/
+    let pointsRegexp = /.+(([+-]\d+) points?).*/
     let optionDivs = document.querySelectorAll('div[class="Options"]')
     optionDivs.map(div => {
         return div.childNodes[2]
@@ -87,7 +87,9 @@ function overrideComplexCardPoints() {
     for (elmnt in overrides) {
         let newOption = document.createElement('ul');
         let selectedOption = parseInt(persistedOptions[elmnt] || "0")
-        let selectionUnits = '<li>' + elmnt + '</li><div class="cssQty custom-option" name="' + elmnt + '"><select name="' + elmnt + '"  delta="' + overrides[elmnt] + '">'
+        let pointCost = overrides[elmnt]
+        let txt = elmnt.replace("+0", pointCost > 0 ? "+" + pointCost : "" + pointCost)
+        let selectionUnits = '<li>' + txt + '</li><div class="cssQty custom-option" name="' + elmnt + '"><select name="' + elmnt + '"  delta="' + pointCost + '">'
         const end = '<li/></select></div>'
         for (let i = 0; i <= maxOfSelectedOptions; i++) {
             let selectedBlock = i === selectedOption ? " selected " : ""
@@ -147,7 +149,7 @@ function initStoredDelta() {
 
 function setupSumbissionListeners() {
     let saveBtn = document.querySelector('button[id="btnSave"]')
-    saveBtn.addEventListener("click", function (e) {
+    saveBtn.addEventListener("click", _ => {
         let extraD = calculateOptionsDelta() + calculateCustomOptionsDelta()
         let multiplier = detectDeltaMultiplier()
         storeCustomSelection()
