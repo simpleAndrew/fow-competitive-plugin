@@ -24,18 +24,36 @@ function fixTheBrokenCards() {
         })
 }
 
-function printCustomAddons() {
-    document.querySelectorAll('div[class="cssUnit"]').forEach(unitDiv => {
-        let unitName = unitDiv.innerText
-        let complexOptions = getPotentialComplexOptions(unitName)
+function customiseAdjustedCards() {
+    document.querySelectorAll('div[class="cssReport"] div[class="cssUnit"]').forEach(unitDiv => {
+        const unitName = unitDiv.innerText
+        const complexOptions = getPotentialComplexOptions(unitName)
+        const unitContainerDiv = unitDiv.parentNode
+        const reportDiv = unitContainerDiv.parentNode
+
+        //add card cost field
+        const overriddenOptions = getOverriddenCards(unitName)
+        let optionDiv = unitContainerDiv.nextElementSibling.children[0]
+        let cardOptionText = optionDiv.innerText
+
+        //if this is actually originally pointless option that receives custom point values
+        if(optionDiv.className === "cssOpt" && overriddenOptions.indexOf(cardOptionText.trim()) !== -1) {
+            optionDiv.className = "cssOptL"
+            let ptsValue = unitDiv.nextElementSibling.nextElementSibling.innerHTML
+            let ptsContainer = document.createElement("div")
+            ptsContainer.innerHTML = ptsValue
+            ptsContainer.className = "cssCP"
+            optionDiv.parentNode.appendChild(ptsContainer)
+        }
+
+        //print custom options
         for (let customOption in complexOptions) {
             let customOptionDiv = document.createElement("div")
             let selectedValue = getCustomOptionValue(armyId, customOption)
             customOptionDiv.className = "cssO"
             let optionCost = selectedValue * complexOptions[customOption]
             customOptionDiv.innerHTML = `<div class="cssOpt custom-points" delta="${optionCost}" id="${customOption}">\n${customOption}\n&nbsp;(${selectedValue} selected) \n</div>`
-            let stackAfterThis = unitDiv.parentNode
-            stackAfterThis.parentNode.insertBefore(customOptionDiv, stackAfterThis.nextSibling)
+            reportDiv.insertBefore(customOptionDiv, optionDiv.parentNode.nextSibling)
         }
     })
 }

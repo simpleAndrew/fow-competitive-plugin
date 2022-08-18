@@ -13,6 +13,6 @@ if (isFormationSupported(formationId)) {
 
     setupSelectionChangeListeners()
 
-    setupSumbissionListeners()
+    setupSubmissionListeners()
 }
 

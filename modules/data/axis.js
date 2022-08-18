@@ -285,7 +285,6 @@ const namedGerman = {
 
 const namedItalian = {
 
-
     "Parachutist 47mm anti-tank platoon": {
         "4x 47mm gun": 6,
         "3x 47mm gun": 4,
@@ -301,10 +300,6 @@ const namedItalian = {
         "Command Card Tactical Brilliance": 3
     },
 
-    "Captured 25 pdr Artillery": {
-        "Command Card Captured 25 pdr Artillery": 2
-    },
-
     "AB41 Armoured Car Company HQ": {
         "2x AB41 (20mm) from (MI113)": 3
     },
@@ -316,6 +311,7 @@ const namedItalian = {
     },
 }
 
+//this one is for printing
 const italianNamedFormationOverrides = {
     "L6/40 Light Tank Company Command Card": {
         "L6/40 Light Tank Company HQ": {
@@ -325,13 +321,14 @@ const italianNamedFormationOverrides = {
         },
 
         "L6/40 Light Tank Platoon": {
-            "5x L6/40 (20mm)": 10,
-            "4x L6/40 (20mm)": 8,
-            "3x L6/40 (20mm)": 6,
+            "5x L6/40 (20mm)": 8,
+            "4x L6/40 (20mm)": 6,
+            "3x L6/40 (20mm)": 5,
         }
     }
 }
 
+//this one is for displaying of formation
 const italianNumberedFormationOverrides = {
     "156": {
         "L6/40 Light Tank Company HQ": {
@@ -341,9 +338,19 @@ const italianNumberedFormationOverrides = {
         },
 
         "L6/40 Light Tank Platoon": {
-            "5x L6/40 (20mm)": 10,
-            "4x L6/40 (20mm)": 8,
-            "3x L6/40 (20mm)": 6,
+            "5x L6/40 (20mm)": 8,
+            "4x L6/40 (20mm)": 6,
+            "3x L6/40 (20mm)": 5,
         }
+    }
+}
+
+//these are Command Cards with overridden costs.
+const cardOverrides = {
+    //this entry stands for both DAK card and Avanti Card.
+    // Two separate lines here are present because the card option is called differently in DAK and Avanti
+    "Captured 25 pdr Artillery": {
+        "Captured 25 pdr Artillery": 2,
+        "Command Card Captured 25 pdr Artillery" : 2
     }
 }

@@ -3,7 +3,7 @@ printInitIds()
 fixTheBrokenCards()
 
 initArmyPoints(_ => {
-    printCustomAddons()
+    customiseAdjustedCards()
     rewriteAllPrintable()
 })
 
