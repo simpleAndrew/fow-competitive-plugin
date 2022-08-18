@@ -7,12 +7,12 @@ if (isFormationSupported(formationId)) {
 
     overrideUnitOptionPoints()
 
-    readUnitPointsFromStorage()
+    readUnitPointsFromStorage(overrideComplexCardPoints)
 
     initStoredDelta()
 
     setupSelectionChangeListeners()
 
-    setupSumbissionListeners()
+    setupSubmissionListeners()
 }
 

@@ -12,11 +12,15 @@ const adjustedPrices = _.merge(
     fightingFirst,
     armouredFist)
 
-const namedUnitsOverrides = _.merge(namedSoviet, namedArmouredFist, namedGerman, namedFightingFirst, namedItalian)
+const namedUnitsOverrides = _.merge(namedSoviet, namedArmouredFist, namedGerman, namedFightingFirst, namedItalian, cardOverrides)
 
 const formationUnitOverrides = italianNumberedFormationOverrides
 
 const formationNameUnitOverrides = italianNamedFormationOverrides
+
+function getOverriddenCards(unitCustomName = unitName) {
+    return Object.keys(cardOverrides[unitCustomName] || {});
+}
 
 function getPoints(optionText, unitCustomName = unitName, customFormationId = formationId) {
     let trimmedOption = optionText.trim()
@@ -39,4 +43,8 @@ function getPointsWithFormationName(optionText, unitCustomName = unitName, forma
 function getAdjustedOptionPoints(additionalOptionPrice) {
     let trimmedName = additionalOptionPrice.trim()
     return adjustedOptionPrices[trimmedName];
+}
+
+function getPotentialComplexOptions(unitName) {
+    return customSelectionOptions[unitName]
 }

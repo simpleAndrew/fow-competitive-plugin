@@ -12,22 +12,30 @@ function overrideUnitPoints() {
             return getPoints(text)
         })
         .forEach(choise => {
-            let text = pointsRegexp.exec(choise.innerHTML)[1]
-            let points = getPoints(text);
+            let unitOptionText = pointsRegexp.exec(choise.innerHTML)[1]
+            let points = getPoints(unitOptionText);
+
             let originalPoints = choise.lastElementChild.textContent.split(" POINT")[0]
             let delta = points - originalPoints
-            choise.lastElementChild.innerHTML = points + "<sup>*</sup>" + " POINTS"
-            choise.lastElementChild.setAttribute("title", originalPoints + " by default")
-            let newCost = document.createElement('p');
-            newCost.textContent = delta;
-            newCost.setAttribute("class", "points-delta")
-            newCost.setAttribute("style", "display: none")
-            choise.appendChild(newCost);
+
+            overridePointValue(originalPoints, points, choise.lastElementChild)
+
+            let newCostHolder = document.createElement('p');
+            newCostHolder.textContent = delta;
+            newCostHolder.setAttribute("class", "points-delta")
+            newCostHolder.setAttribute("style", "display: none")
+
+            choise.appendChild(newCostHolder);
         })
 }
 
+function overridePointValue(originalPoints, newPoints, domeElement) {
+    domeElement.innerHTML = `${newPoints}<sup>*</sup> POINTS`
+    domeElement.setAttribute("title", `${originalPoints} by default`)
+}
+
 function overrideUnitOptionPoints() {
-    let pointsRegexp = /.+(([\+-]\d+) points?).*/
+    let pointsRegexp = /.+(([+-]\d+) points?).*/
     let optionDivs = document.querySelectorAll('div[class="Options"]')
     optionDivs.map(div => {
         return div.childNodes[2]
@@ -48,20 +56,62 @@ function overrideUnitOptionPoints() {
 
             let holder = div.parentNode.querySelector('div[class="Options"] input[type="checkbox"]')
             let attr = document.createAttribute("delta")
-            attr.value = currentDelta
+            attr.value = `${currentDelta}`
             holder.attributes.setNamedItem(attr)
 
-            let newPointsText = (adjustedPrice > 0 ? "+" : "")
-                + adjustedPrice + "<sup>*</sup> point"
-                + ((adjustedPrice === 1 || adjustedPrice === -1) ? "" : "s")
+            let pointsWord = "point" + (adjustedPrice === 1 || adjustedPrice === -1) ? "" : "s"
+            let sign = (adjustedPrice > 0 ? "+" : "")
+            let newPointsText = `${sign}${adjustedPrice}<sup>*</sup> ${pointsWord}`
 
             let adjustedText = originalText.replace(parsedPoints, newPointsText)
             let newDescription = document.createElement('span');
             newDescription.innerHTML = adjustedText;
-            newDescription.setAttribute("title", parsedPoints + " by default")
+            newDescription.setAttribute("title", `${parsedPoints} by default`)
             div.parentNode.replaceChild(newDescription, div)
         }
     })
+}
+
+function overrideComplexCardPoints() {
+    let overrides = getPotentialComplexOptions(unitName)
+    if (!overrides) {
+        log("Have no complex overrides")
+        return;
+    }
+
+    log(`${unitName} has complex overrides: ${JSON.stringify(overrides)}`)
+
+    let customOptionsContainer = document.createElement("div")
+    customOptionsContainer.className = "Options ORaw"
+    let maxOfSelectedOptions = Math.max(...document.querySelectorAll('div[class="cssQty"] select option')
+        .map(opt => {
+                return parseInt(opt.value)
+            }
+        )
+    )
+
+    let persistedOptions = getCustomOptions(armyId, formationId, unitId)
+
+    for (elmnt in overrides) {
+        let newOption = document.createElement('ul');
+        let selectedOption = parseInt(persistedOptions[elmnt] || "0")
+        let pointCost = overrides[elmnt]
+        let txt = elmnt.replace("+0", pointCost > 0 ? `+${pointCost}` : `${pointCost}`)
+        let selectionUnits = `<li>${txt}</li><div class="cssQty custom-option" name="${elmnt}"><select name="${elmnt}"  delta="${pointCost}">`
+        const end = '<li/></select></div>'
+        for (let i = 0; i <= maxOfSelectedOptions; i++) {
+            let selectedBlock = i === selectedOption ? "selected" : ""
+            let unitWord = i === 1 ? "unit" : "units"
+            selectionUnits += `<option value="${i}" ${selectedBlock} >${i} ${unitWord}</option>`
+        }
+        newOption.innerHTML = selectionUnits + end
+        customOptionsContainer.append(newOption)
+    }
+
+    let optionsStart = document.querySelector('div[class="Options ORaw"]')
+    optionsStart.parentNode.insertBefore(customOptionsContainer, optionsStart)
+
+    log("Options are added")
 }
 
 function calculateOptionsDelta() {
@@ -85,6 +135,18 @@ function calculateOptionsDelta() {
     return finalSum
 }
 
+function calculateCustomOptionsDelta() {
+    let finalSum = 0
+    document.querySelectorAll('div[class="cssQty custom-option"] select').forEach(opt => {
+        let costDelta = parseInt(opt.attributes.getNamedItem("delta").value)
+        log(`delta: ${costDelta}`)
+        let multiplier = opt.selectedOptions[0].value
+        log(`custom option delta ${opt.name}: ${costDelta * multiplier}`)
+        finalSum += costDelta * multiplier
+    })
+    return finalSum
+}
+
 function initStoredDelta() {
     let radioBtn = document.querySelector('input[id="Choice"][checked="checked"][type="radio"]')
     if (radioBtn) {
@@ -93,11 +155,12 @@ function initStoredDelta() {
     }
 }
 
-function setupSumbissionListeners() {
+function setupSubmissionListeners() {
     let saveBtn = document.querySelector('button[id="btnSave"]')
-    saveBtn.addEventListener("click", function (e) {
-        let extraD = calculateOptionsDelta()
+    saveBtn.addEventListener("click", _ => {
+        let extraD = calculateOptionsDelta() + calculateCustomOptionsDelta()
         let multiplier = detectDeltaMultiplier()
+        storeCustomSelection()
         storeDelta(armyId, formationId, unitId, delta * multiplier + extraD)
     })
 
@@ -105,6 +168,18 @@ function setupSumbissionListeners() {
     clearBtn.addEventListener("click", function () {
         clearUnitDelta(armyId, formationId, unitId)
     })
+}
+
+function storeCustomSelection() {
+    document.querySelectorAll('div[class="cssQty custom-option"] select').forEach(opt => {
+            let optionName = opt.name
+            let selectedCount = opt.selectedOptions[0].value
+
+            log(`storing option ${optionName}: ${selectedCount}`)
+
+            storeCustomOptions(armyId, formationId, unitId, {[optionName]: selectedCount})
+        }
+    )
 }
 
 function detectDeltaMultiplier() {

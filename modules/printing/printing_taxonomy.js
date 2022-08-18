@@ -4,6 +4,7 @@ let currentUnit = null
 let currentUnitName = null
 let currentFormationDelta = 0
 let currentUnitDelta = 0
+let currentCustomAddonPoints = 0
 let armyD = 0
 
 function fixTheBrokenCards() {
@@ -23,17 +24,55 @@ function fixTheBrokenCards() {
         })
 }
 
+function customiseAdjustedCards() {
+    document.querySelectorAll('div[class="cssReport"] div[class="cssUnit"]').forEach(unitDiv => {
+        const unitName = unitDiv.innerText
+        const complexOptions = getPotentialComplexOptions(unitName)
+        const unitContainerDiv = unitDiv.parentNode
+        const reportDiv = unitContainerDiv.parentNode
+
+        //add card cost field
+        const overriddenOptions = getOverriddenCards(unitName)
+        let optionDiv = unitContainerDiv.nextElementSibling.children[0]
+        let cardOptionText = optionDiv.innerText
+
+        //if this is actually originally pointless option that receives custom point values
+        if(optionDiv.className === "cssOpt" && overriddenOptions.indexOf(cardOptionText.trim()) !== -1) {
+            optionDiv.className = "cssOptL"
+            let ptsValue = unitDiv.nextElementSibling.nextElementSibling.innerHTML
+            let ptsContainer = document.createElement("div")
+            ptsContainer.innerHTML = ptsValue
+            ptsContainer.className = "cssCP"
+            optionDiv.parentNode.appendChild(ptsContainer)
+        }
+
+        //print custom options
+        for (let customOption in complexOptions) {
+            let customOptionDiv = document.createElement("div")
+            let selectedValue = getCustomOptionValue(armyId, customOption)
+            customOptionDiv.className = "cssO"
+            let optionCost = selectedValue * complexOptions[customOption]
+            customOptionDiv.innerHTML = `<div class="cssOpt custom-points" delta="${optionCost}" id="${customOption}">\n${customOption}\n&nbsp;(${selectedValue} selected) \n</div>`
+            reportDiv.insertBefore(customOptionDiv, optionDiv.parentNode.nextSibling)
+        }
+    })
+}
+
 function logStatLine() {
-    log("Formation:" + currentFormationName + "; Unit: " + currentUnitName +
-        "; Deltas: Army[" + armyD + "], Formation[" + currentFormationDelta + "], Unit[" + currentUnitDelta + "]")
+    log(`Formation:${currentFormationName}; Unit:${currentUnitName}
+        Deltas: Army[${armyD}], Formation[${currentFormationDelta}], Unit[${currentUnitDelta}], Custom[${currentCustomAddonPoints}]`)
+}
+
+function isArmyDiv(div) {
+    return div.className === "cssTotal";
 }
 
 function isFormationDiv(div) {
-    return div.querySelector('div[class="cssFrm"');
+    return div.querySelector('div[class="cssFrm"]');
 }
 
 function isUnitDiv(div) {
-    return div.querySelector('div[class="cssUnit"');
+    return div.querySelector('div[class="cssUnit"]');
 }
 
 function isUnitOptionDiv(div) {
@@ -44,8 +83,8 @@ function isUnitAddonDiv(div) {
     return (div.children[0] || {}).className === "cssOpt";
 }
 
-function isArmyDiv(div) {
-    return div.className === "cssTotal";
+function isCustomAddonDiv(div) {
+    return (div.children[0] || {}).className === "cssOpt custom-points"
 }
 
 function overrideOptionPoints(divContainer) {
@@ -54,9 +93,9 @@ function overrideOptionPoints(divContainer) {
     unitNames.filter(choise => {
         return getPointsWithFormationName(choise.innerHTML, currentUnitName, currentFormationName)
     })
-        .forEach(choise => {
-            let points = getPointsWithFormationName(choise.innerHTML, currentUnitName, currentFormationName);
-            let pointsContainer = choise.parentElement.querySelector('div[class="cssCP"]')
+        .forEach(choice => {
+            let points = getPointsWithFormationName(choice.innerHTML, currentUnitName, currentFormationName);
+            let pointsContainer = choice.parentElement.querySelector('div[class="cssCP"]')
             let originalPoints = parseInt(pointsContainer.textContent)
             pointsContainer.innerHTML = points + "<sup>*</sup>"
             pointsContainer.setAttribute("title", originalPoints + " by default")
@@ -88,7 +127,7 @@ function overrideAddOnPoints(divContainer) {
 
     let adjustedOptionPoints = getAdjustedOptionPoints(optionText);
 
-    log("Adjusted addon: " + optionText + "; adjusted point cost: " + adjustedOptionPoints )
+    log("Adjusted addon: " + optionText + "; adjusted point cost: " + adjustedOptionPoints)
     if (adjustedOptionPoints !== undefined && adjustedOptionPoints !== 0) {
         let pointsText = parts[2]
         let pointsVal = parts[3]
@@ -114,26 +153,35 @@ function overrideAddOnPoints(divContainer) {
     }
 }
 
+function handleCustomAddonPoints(divContainer) {
+    let container = divContainer.children[0]
+    let customPointsDelta = parseInt(container.attributes.getNamedItem("delta").value);
+    log(`Adding ${customPointsDelta} for option ${container.id}`)
+    currentCustomAddonPoints += customPointsDelta
+    logStatLine()
+}
+
 function overrideUnitPoints() {
-    if (currentUnit && currentUnitDelta !== 0) {
-        let pointsDiv = currentUnit.querySelector('div[class="cssUPts"')
+    if (currentUnit && (currentUnitDelta + currentCustomAddonPoints) !== 0 ) {
+        let pointsDiv = currentUnit.querySelector('div[class="cssUPts"]')
         let originalPoints = parseInt(pointsDiv.textContent)
-        pointsDiv.innerHTML = (originalPoints + currentUnitDelta) + "<sup>*</sup>"
+        pointsDiv.innerHTML = (originalPoints + currentUnitDelta + currentCustomAddonPoints) + "<sup>*</sup>"
         pointsDiv.setAttribute("title", originalPoints + " by default")
         log("Original Unit Points: " + originalPoints)
-    } else if(currentUnit) {
+    } else if (currentUnit) {
         log("Unit handling done")
         logStatLine()
     }
-    currentFormationDelta += currentUnitDelta
+    currentFormationDelta += currentUnitDelta + currentCustomAddonPoints
     currentUnitDelta = 0
+    currentCustomAddonPoints = 0
     currentUnit = null
     currentUnitName = null
 }
 
 function overrideFormation() {
     if (currentFormation && currentFormationDelta !== 0) {
-        let pointsDiv = currentFormation.querySelector('div[class="cssPts"')
+        let pointsDiv = currentFormation.querySelector('div[class="cssPts"]')
         let originalPoints = parseInt(pointsDiv.textContent)
         pointsDiv.innerHTML = (originalPoints + currentFormationDelta) + "<sup>*</sup>"
         pointsDiv.setAttribute("title", originalPoints + " by default")
