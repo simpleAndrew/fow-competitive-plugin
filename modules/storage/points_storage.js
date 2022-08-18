@@ -104,10 +104,9 @@ function getCustomOptions(armyId, formationId, unitId) {
 }
 
 function getCustomOptionValue(armyId, optionName) {
-    return (_.flatMap(armyPoints[armyId], f => _.flatMap(f))
-        .filter(a => a)
-        .filter(e => e[custom_field])
-        .map(e => e[custom_field])[0] || {})[optionName]
+    return _.flatMap(armyPoints[armyId], f => _.flatMap(f))
+        .filter(a => ((a || {})[custom_field] || {})[optionName])
+        .map(e => e[custom_field][optionName])[0]
 
 }
 

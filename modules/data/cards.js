@@ -20,11 +20,11 @@ const adjustedOptionPrices = {
 
 const customSelectionOptions = {
     "Captured 25 pdr Artillery": {
-        "Add +1 point for a unit of 2 guns": 1,
-        "Add +2 points for a unit of 4 guns": 2
+        "+1 point for a unit of 2 guns": 1,
+        "+2 points for a unit of 4 guns": 2
     },
     "Always Prepared": {
-        "-1 point for a big unit (10 rifle teams & extras)": 0,
+        "0 point for a big unit (10 rifle teams & extras)": 0,
         "-1 point for a small unit (7 rifle teams & extras)": -1
     },
     "Regulars, By God!": {
