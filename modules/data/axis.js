@@ -218,14 +218,7 @@ const whiteDeath = {
 }
 
 const hungarianSteel = {
-    "3x Panzer IV (short 7.5cm)": 18,
-    "2x Panzer IV (short 7.5cm)": 12,
-    "1x Panzer IV (short 7.5cm)": 6,
 
-    "3x Panzer III (5cm)": 18,
-    "2x Panzer III (5cm)": 12,
-    "3x Panzer III (7.5cm)": 19,
-    "2x Panzer III (7.5cm)": 13,
 
     "4x 40mm gun": 6,
     "2x 40mm gun": 3,
@@ -328,6 +321,28 @@ const italianNamedFormationOverrides = {
     }
 }
 
+const hungarianNamedFormationOverrides = {
+    "Panzer IV Heavy Tank Company": {
+        "Panzer IV Heavy Tank Company HQ": {
+            "2x Panzer IV (short 7.5cm)": 12,
+            "1x Panzer IV (short 7.5cm)": 6,
+        },
+        "Panzer IV Tank Platoon": {
+            "3x Panzer IV (short 7.5cm)": 18,
+            "2x Panzer IV (short 7.5cm)": 12,
+            "1x Panzer IV (short 7.5cm)": 6,
+        }
+    },
+    "T-38 Tank Company" : {
+        "Panzer III Tank Platoon": {
+            "3x Panzer III (5cm)": 18,
+            "2x Panzer III (5cm)": 12,
+            "3x Panzer III (7.5cm)": 19,
+            "2x Panzer III (7.5cm)": 13
+        }
+    }
+}
+
 //this one is for displaying of formation
 const italianNumberedFormationOverrides = {
     "156": {
@@ -344,6 +359,28 @@ const italianNumberedFormationOverrides = {
         }
     }
 }
+const hungarianNumberedFormationOverrides = {
+    "536": {
+        "Panzer III Tank Platoon": {
+            "3x Panzer III (5cm)": 18,
+            "2x Panzer III (5cm)": 12,
+            "3x Panzer III (7.5cm)": 19,
+            "2x Panzer III (7.5cm)": 13
+        }
+    },
+    "537": {
+        "Panzer IV Heavy Tank Company HQ": {
+            "2x Panzer IV (short 7.5cm)": 12,
+            "1x Panzer IV (short 7.5cm)": 6,
+        },
+        "Panzer IV Tank Platoon": {
+            "3x Panzer IV (short 7.5cm)": 18,
+            "2x Panzer IV (short 7.5cm)": 12,
+            "1x Panzer IV (short 7.5cm)": 6,
+        }
+    },
+
+}
 
 //these are Command Cards with overridden costs.
 const cardOverrides = {
@@ -351,6 +388,6 @@ const cardOverrides = {
     // Two separate lines here are present because the card option is called differently in DAK and Avanti
     "Captured 25 pdr Artillery": {
         "Captured 25 pdr Artillery": 2,
-        "Command Card Captured 25 pdr Artillery" : 2
+        "Command Card Captured 25 pdr Artillery": 2
     }
 }

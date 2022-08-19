@@ -16,6 +16,9 @@ const adjustedOptionPrices = {
     //avanti
     "Command Card Captured 6 pdr Anti-tank (with 3 guns)": -1,
     "Command Card Captured 6 pdr Anti-tank (with 2 guns)": -1,
+
+    //hungarian pz4
+    "Replace any or all Panzer IV (short 7.5cm) with Panzer IV (long 7.5cm) for +2 points each." : 1,
 }
 
 const customSelectionOptions = {
