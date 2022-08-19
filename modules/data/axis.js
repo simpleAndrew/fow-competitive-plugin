@@ -282,9 +282,46 @@ const namedGerman = {
         "1x Panzer IV (late 7.5cm) from (MG236)<br>2x T-34 (76mm) from (MS137)": 24
     },
     "Fallschirmjäger Marder II (7.5cm) Tank-hunter Platoon":{
-        "4x Marder II (7.5cm)": 22,
-        "3x Marder II (7.5cm)": 16,
-        "2x Marder II (7.5cm)": 10
+        "4x Marder II (7.5cm)": 25,
+        "3x Marder II (7.5cm)": 19,
+        "2x Marder II (7.5cm)": 13
+    },
+    "Fallschirmjäger 8cm Mortar Platoon": {
+        "4x 8cm Stummel mortar": 6,
+        "3x 8cm Stummel mortar": 5,
+        "2x 8cm Stummel mortar": 3
+    },
+    "Fallschirmjäger 3.7cm Tank-hunter Platoon": {
+        "4x 3.7cm gun": 8,
+        "3x 3.7cm gun": 6,
+        "2x 3.7cm gun": 4,
+
+        "4x 3.7cm (Stielgranate) gun": 10,
+        "3x 3.7cm (Stielgranate) gun": 8,
+        "2x 3.7cm (Stielgranate) gun": 5,
+    },
+    "Fallschirmjäger 10.5cm Recoilless Battery": {
+        "4x 10.5cm recoilless gun": 12,
+        "2x 10.5cm recoilless gun": 6
+    },
+    "Fallschirmjäger 7.5cm Artillery Battery": {
+        "4x 7.5cm mountain gun": 10,
+        "2x 7.5cm mountain gun": 5
+    },
+    "Fallschirmjäger 7.5cm Tank-hunter Platoon" : {
+        "4x 7.5cm gun": 21,
+        "3x 7.5cm gun": 16,
+        "2x 7.5cm gun": 11
+    },
+    "Fallschirmjäger 2cm Anti-aircraft Platoon": {
+        "4x 2cm anti-aircraft gun": 8,
+        "3x 2cm anti-aircraft gun": 6,
+        "2x 2cm anti-aircraft gun": 4
+    },
+    "Fallschirmjäger 5cm Tank-hunter Platoon": {
+        "4x 5cm gun": 14,
+        "3x 5cm gun": 11,
+        "2x 5cm gun": 7
     }
 }
 
