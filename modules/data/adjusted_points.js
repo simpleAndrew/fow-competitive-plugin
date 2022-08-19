@@ -12,7 +12,7 @@ const adjustedPrices = _.merge(
     fightingFirst,
     armouredFist)
 
-const namedUnitsOverrides = _.merge(namedSoviet, namedArmouredFist, namedGerman, namedFightingFirst, namedItalian, cardOverrides)
+const namedUnitsOverrides = _.merge(namedSoviet, namedArmouredFist, namedGerman, namedFightingFirst, namedItalian, cardOverrides, namedWhiteDeath)
 
 const formationUnitOverrides = _.merge(italianNumberedFormationOverrides, hungarianNumberedFormationOverrides)
 

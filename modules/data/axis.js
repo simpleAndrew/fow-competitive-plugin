@@ -206,11 +206,15 @@ const whiteDeath = {
     "3x BT-42 (114mm)": 10,
     "2x BT-42 (114mm)": 7,
 
-    "4x 105mm howitzer": 10,
-    "2x 105mm howitzer": 5,
-
     "4x 122mm howitzer": 8,
     "2x 122mm howitzer": 4
+}
+
+const namedWhiteDeath = {
+    "105mm Howitzer Artillery Battery": {
+        "4x 105mm howitzer": 10,
+        "2x 105mm howitzer": 5,
+    },
 
 }
 
