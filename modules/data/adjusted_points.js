@@ -1,4 +1,3 @@
-
 const adjustedPrices = _.merge(
     afrikaKorps,
     ironCross,
@@ -12,7 +11,7 @@ const adjustedPrices = _.merge(
     fightingFirst,
     armouredFist)
 
-const namedUnitsOverrides = _.merge(namedSoviet, namedArmouredFist, namedGerman, namedFightingFirst, namedItalian, cardOverrides, namedWhiteDeath)
+const namedUnitsOverrides = _.merge(namedSoviet, namedArmouredFist, namedGerman, namedFightingFirst, namedItalian, cardOverrides, namedWhiteDeath, namedHungarian)
 
 const formationUnitOverrides = _.merge(italianNumberedFormationOverrides, hungarianNumberedFormationOverrides)
 

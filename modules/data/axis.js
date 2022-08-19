@@ -220,10 +220,8 @@ const namedWhiteDeath = {
 
 const hungarianSteel = {
 
-
     "4x 40mm gun": 6,
     "2x 40mm gun": 3,
-
     "4x 40mm gun with Kerngranate": 8,
     "2x 40mm gun with Kerngranate ": 4,
 
@@ -232,8 +230,8 @@ const hungarianSteel = {
 
     "4x 81mm mortar": 3,
 
-    "4x Short 75mm gun": 8,
-    "2x Short 75mm gun": 4,
+    "4x Short 75mm gun": 10,
+    "2x Short 75mm gun": 5,
 
     "4x 75mm mountain gun": 8,
     "2x 75mm mountain gun": 4,
@@ -246,6 +244,25 @@ const hungarianSteel = {
 
 }
 
+const namedHungarian = {
+    "Motorised 40mm Anti-tank Platoon": {
+        "4x 40mm gun": 8,
+        "2x 40mm gun": 4,
+        "4x 40mm gun with Kerngranate": 10,
+        "2x 40mm gun with Kerngranate": 5
+    },
+    "Motorised 50mm Anti-tank Platoon": {
+        "4x 50mm gun": 12,
+        "2x 50mm gun": 6
+    },
+    "Motorised 81mm Mortar Platoon": {
+        "4x 81mm mortar": 5,
+        "x 81mm mortar": 3
+    },
+    "Csaba Armoured Car Company HQ": {
+        "3x Csaba": 5
+    }
+}
 const braveRomania = {
     "3x T-3 (7.5cm)": 18,
     "1x T-3 (7.5cm)": 6,
