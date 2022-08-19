@@ -83,9 +83,6 @@ const ironCross = {
     "2x Sd Kfz 222 (2cm)<br>1x Sd Kfz 221 (MG)": 3,
     "2x Sd Kfz 222 (2cm)<br>2x Sd Kfz 221 (MG)": 4,
 
-    "4x Marder II (7.5cm)": 22,
-    "3x Marder II (7.5cm)": 16,
-    "2x Marder II (7.5cm)": 10,
 
     "3x Sd Kfz 7/1 (2cm quad)": 4,
     "2x Sd Kfz 7/1 (2cm quad)": 3,
@@ -273,6 +270,21 @@ const namedGerman = {
     },
     "Armoured FlaK Half-tracks": {
         "Armoured FlaK Half-tracks Command Card": 2
+    },
+    "StuG Company (RC)": {
+        "2x StuG (long 7.5cm)": 14
+    },
+    "Captured T-34 Platoon": {
+        "4x T-34 (76mm) from (MS137)": 29,
+        "3x T-34 (76mm) from (MS137)": 22,
+        "1x Panzer IV (late 7.5cm) from (MG236)<br>4x T-34 (76mm) from (MS137)": 38,
+        "1x Panzer IV (late 7.5cm) from (MG236)<br>3x T-34 (76mm) from (MS137)": 31,
+        "1x Panzer IV (late 7.5cm) from (MG236)<br>2x T-34 (76mm) from (MS137)": 24
+    },
+    "Fallschirmjäger Marder II (7.5cm) Tank-hunter Platoon":{
+        "4x Marder II (7.5cm)": 22,
+        "3x Marder II (7.5cm)": 16,
+        "2x Marder II (7.5cm)": 10
     }
 }
 
