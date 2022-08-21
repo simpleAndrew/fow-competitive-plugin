@@ -52,24 +52,23 @@ const namedFightingFirst = {
 }
 
 const namedArmouredFist = {
-    "3-inch mortar platoon": {
+    "3-inch Mortar Platoon": {
         "6x 3-inch mortar": 7,
         "4x 3-inch mortar": 5,
         "2x 3-inch mortar": 3
     },
 
-    "Parachute 3-inch mortar platoon": {
+    "Parachute 3-inch Mortar Platoon": {
         "6x 3-inch mortar": 7,
         "4x 3-inch mortar": 5,
         "2x 3-inch mortar": 3
     },
 
-    "Airlanding 6 pdr anti-tank platoon": {
-        "4x 6 pdr gun": 13,
-        "2x 6 pdr gun": 7,
+    "Airlanding 6 pdr Anti-tank Platoon": {
+        "4x 6 pdr gun": 13
     },
-    "Commando Vickers MMG section": {
-        "3x Vickers MMG ": 7
+    "Commando Vickers MMG Section": {
+        "3x Vickers MMG team": 4
     },
     "New Zealand Divisional Cavalry": {
         "2x Honey from (MB107)": 5
