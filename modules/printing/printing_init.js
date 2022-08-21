@@ -23,8 +23,9 @@ function rewriteAllPrintable() {
             } else if (isUnitDiv(currentDiv)) {
                 overrideUnitPoints()
                 log("Next Unit starting")
-                currentUnit = currentDiv
+                currentUnitDiv = currentDiv
                 currentUnitName = currentDiv.firstElementChild.textContent
+                currentUnitCard = currentDiv.firstElementChild.nextSibling.textContent
                 logStatLine()
             } else if (isUnitOptionDiv(currentDiv)) {
                 log("Next Unit Option starting")

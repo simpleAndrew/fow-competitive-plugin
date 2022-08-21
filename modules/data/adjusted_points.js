@@ -10,14 +10,16 @@ const adjustedPrices = _.merge(
     fightingFirst,
     armouredFist)
 
-const namedUnitsOverrides = _.merge(namedSoviet, namedArmouredFist, namedGerman, namedFightingFirst, namedItalian, cardOverrides, namedWhiteDeath, namedHungarian)
+const namedUnitsOverrides = _.merge(namedSoviet, namedArmouredFist, namedGerman, namedFightingFirst, namedItalian, axisCommandCardOverrides, namedWhiteDeath, namedHungarian)
 
-const formationUnitOverrides = _.merge(italianNumberedFormationOverrides, hungarianNumberedFormationOverrides)
+const formationUnitOverrides = formationIdOverrides
 
-const formationNameUnitOverrides = _.merge(italianNamedFormationOverrides, hungarianNamedFormationOverrides)
+const formationNameUnitOverrides = namedFormationOverrides
+
+const unitCardOverrides = axisUnitCardOverrides
 
 function getOverriddenCards(unitCustomName = unitName) {
-    return Object.keys(cardOverrides[unitCustomName] || {});
+    return Object.keys(axisCommandCardOverrides[unitCustomName] || {});
 }
 
 function getPoints(optionText, unitCustomName = unitName, customFormationId = formationId) {
@@ -29,11 +31,13 @@ function getPoints(optionText, unitCustomName = unitName, customFormationId = fo
         || adjustedPrices[trimmedOption]
 }
 
-function getPointsWithFormationName(optionText, unitCustomName = unitName, formationName = null) {
+function getPointsWithFormationName(optionText, unitCustomName = unitName, card = null,  formationName = null) {
     let trimmedOption = optionText.trim()
     let formationOvers = formationName ? formationNameUnitOverrides[formationName] || {} : {}
+    let unitCardOverride = card ? unitCardOverrides[card] || {} : {}
     let namedOvers = namedUnitsOverrides[unitCustomName] || {};
     return (formationOvers[unitCustomName] || {})[trimmedOption]
+        || unitCardOverride[trimmedOption]
         || namedOvers[trimmedOption]
         || adjustedPrices[trimmedOption]
 }

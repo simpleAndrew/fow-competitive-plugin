@@ -1,7 +1,8 @@
 let currentFormation = null
 let currentFormationName = null
-let currentUnit = null
+let currentUnitDiv = null
 let currentUnitName = null
+let currentUnitCard = null
 let currentFormationDelta = 0
 let currentUnitDelta = 0
 let currentCustomAddonPoints = 0
@@ -59,7 +60,7 @@ function customiseAdjustedCards() {
 }
 
 function logStatLine() {
-    log(`Formation:${currentFormationName}; Unit:${currentUnitName}
+    log(`Formation:${currentFormationName}; Unit:${currentUnitName}; Card:${currentUnitCard};\n
         Deltas: Army[${armyD}], Formation[${currentFormationDelta}], Unit[${currentUnitDelta}], Custom[${currentCustomAddonPoints}]`)
 }
 
@@ -91,17 +92,16 @@ function overrideOptionPoints(divContainer) {
     let unitNames = divContainer.querySelectorAll('div[class="cssOptL"]');
 
     unitNames.filter(choise => {
-        return getPointsWithFormationName(choise.innerHTML, currentUnitName, currentFormationName)
+        return getPointsWithFormationName(choise.innerHTML, currentUnitName, currentUnitCard, currentFormationName)
     })
         .forEach(choice => {
-            let points = getPointsWithFormationName(choice.innerHTML, currentUnitName, currentFormationName);
+            let points = getPointsWithFormationName(choice.innerHTML, currentUnitName, currentUnitCard, currentFormationName);
             let pointsContainer = choice.parentElement.querySelector('div[class="cssCP"]')
             let originalPoints = parseInt(pointsContainer.textContent)
             pointsContainer.innerHTML = points + "<sup>*</sup>"
             pointsContainer.setAttribute("title", originalPoints + " by default")
             currentUnitDelta += points - originalPoints
-            log("Points: original[" + originalPoints +
-                "]; adjusted[" + points + "]; delta[" + (points - originalPoints) + "]")
+            log(`Points: original[${originalPoints}]; adjusted[${points}]; delta[${points - originalPoints}]`)
             logStatLine()
         })
 }
@@ -127,26 +127,26 @@ function overrideAddOnPoints(divContainer) {
 
     let adjustedOptionPoints = getAdjustedOptionPoints(optionText);
 
-    log("Adjusted addon: " + optionText + "; adjusted point cost: " + adjustedOptionPoints)
+    log(`Adjusted addon: ${optionText}; adjusted point cost: ${adjustedOptionPoints}`)
     if (adjustedOptionPoints !== undefined && adjustedOptionPoints !== 0) {
         let pointsText = parts[2]
         let pointsVal = parts[3]
-        log("Addon original points: " + pointsVal)
+        log(`Addon original points: ${pointsVal}`)
 
         let priceDelta = adjustedOptionPoints - parseInt(pointsVal)
 
-        log("Addon points delta:" + priceDelta)
+        log(`Addon points delta: ${priceDelta}`)
 
         let newPointsText = (adjustedOptionPoints > 0 ? "+" : "")
             + adjustedOptionPoints + "<sup>*</sup> point"
             + ((adjustedOptionPoints === 1 || adjustedOptionPoints === -1) ? "" : "s")
 
         container.innerHTML = originalHtml.replace(pointsText, newPointsText)
-        container.setAttribute("title", "\"" + pointsText + "\" by default")
+        container.setAttribute("title", `"${pointsText}" by default`)
 
         let factor = parts[5] ? parseInt(parts[5]) : 1
 
-        log("Addons selected count: " + factor)
+        log(`Addons selected count: ${factor}`)
 
         currentUnitDelta += priceDelta * factor
         logStatLine()
@@ -162,21 +162,22 @@ function handleCustomAddonPoints(divContainer) {
 }
 
 function overrideUnitPoints() {
-    if (currentUnit && (currentUnitDelta + currentCustomAddonPoints) !== 0 ) {
-        let pointsDiv = currentUnit.querySelector('div[class="cssUPts"]')
+    if (currentUnitDiv && (currentUnitDelta + currentCustomAddonPoints) !== 0 ) {
+        let pointsDiv = currentUnitDiv.querySelector('div[class="cssUPts"]')
         let originalPoints = parseInt(pointsDiv.textContent)
         pointsDiv.innerHTML = (originalPoints + currentUnitDelta + currentCustomAddonPoints) + "<sup>*</sup>"
         pointsDiv.setAttribute("title", originalPoints + " by default")
-        log("Original Unit Points: " + originalPoints)
-    } else if (currentUnit) {
+        log(`Original Unit Points: ${originalPoints}`)
+    } else if (currentUnitDiv) {
         log("Unit handling done")
         logStatLine()
     }
     currentFormationDelta += currentUnitDelta + currentCustomAddonPoints
     currentUnitDelta = 0
     currentCustomAddonPoints = 0
-    currentUnit = null
+    currentUnitDiv = null
     currentUnitName = null
+    currentUnitCard = null
 }
 
 function overrideFormation() {
@@ -185,7 +186,7 @@ function overrideFormation() {
         let originalPoints = parseInt(pointsDiv.textContent)
         pointsDiv.innerHTML = (originalPoints + currentFormationDelta) + "<sup>*</sup>"
         pointsDiv.setAttribute("title", originalPoints + " by default")
-        log("Original Formation Points: " + originalPoints)
+        log(`Original Formation Points: ${originalPoints}`)
     } else if (currentFormation) {
         log("Formation handling done")
         logStatLine()
@@ -202,7 +203,7 @@ function overrideArmy(div) {
         let originalPoints = parseInt(pointsDiv.textContent.split(":")[1])
         pointsDiv.innerHTML = "Total Points:" + (originalPoints + armyD) + "<sup>*</sup>"
         pointsDiv.setAttribute("title", originalPoints + " by default")
-        log("Original Army Points: " + originalPoints)
+        log(`Original Army Points: ${originalPoints}`)
         log("Army handling done")
         logStatLine()
     }
