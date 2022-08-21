@@ -294,8 +294,8 @@ const namedItalian = {
     }
 }
 
-const italianNamedFormationOverrides = {}
-const italianNumberedFormationOverrides = {}
+
+
 
 const whiteDeath = {
     "3x T-34 (76mm)": 21,
@@ -381,29 +381,53 @@ const braveRomania = {
     "2x AB (2cm)<br>1x AB (MG)": 3
 }
 
-const hungarianNamedFormationOverrides = {
-    "Panzer IV Heavy Tank Company": {
-        "Panzer IV Heavy Tank Company HQ": {
-            "2x Panzer IV (short 7.5cm)": 12,
-            "1x Panzer IV (short 7.5cm)": 6,
-        },
-        "Panzer IV Tank Platoon": {
-            "3x Panzer IV (short 7.5cm)": 18,
-            "2x Panzer IV (short 7.5cm)": 12,
-            "1x Panzer IV (short 7.5cm)": 6,
-        }
-    },
-    "T-38 Tank Company": {
-        "Panzer III Tank Platoon": {
-            "3x Panzer III (5cm)": 18,
-            "2x Panzer III (5cm)": 12,
-            "3x Panzer III (7.5cm)": 19,
-            "2x Panzer III (7.5cm)": 13
-        }
+//these are Command Cards with overridden costs.
+const axisCommandCardOverrides = {
+    //this entry stands for both DAK card and Avanti Card.
+    // Two separate lines here are present because the card option is called differently in DAK and Avanti
+    "Captured 25 pdr Artillery": {
+        "Captured 25 pdr Artillery": 2,
+        "Command Card Captured 25 pdr Artillery": 2
     }
 }
 
-const hungarianNumberedFormationOverrides = {
+/**
+ * Overrides used to override point values on Force View (Printing) menu
+ */
+const axisUnitCardOverrides = {
+    "MH114": {
+        "2x Panzer IV (short 7.5cm)": 12,
+        "1x Panzer IV (short 7.5cm)": 6,
+    },
+    "MH104": {
+        "3x Panzer IV (short 7.5cm)": 18,
+        "2x Panzer IV (short 7.5cm)": 12,
+        "1x Panzer IV (short 7.5cm)": 6
+    },
+    "MH103": {
+        "3x Panzer III (5cm)": 18,
+        "2x Panzer III (5cm)": 12,
+        "3x Panzer III (7.5cm)": 19,
+        "2x Panzer III (7.5cm)": 13
+    }
+}
+
+/**
+ * Overrides used to override point values on Force View (Printing) menu
+ */
+const namedFormationOverrides = {
+    //not used now since card ID override is enough, but could be of use in the future
+    //"<Formation Name>": {
+    //     "<Unit Name>": {
+    //             "<Unit Option>": 100
+    //     }
+    // }
+}
+
+/**
+ * Overrides used to override point values on Unit Display Screen
+ */
+const formationIdOverrides = {
     "536": {
         "Panzer III Tank Platoon": {
             "3x Panzer III (5cm)": 18,
@@ -422,16 +446,5 @@ const hungarianNumberedFormationOverrides = {
             "2x Panzer IV (short 7.5cm)": 12,
             "1x Panzer IV (short 7.5cm)": 6,
         }
-    },
-
-}
-
-//these are Command Cards with overridden costs.
-const cardOverrides = {
-    //this entry stands for both DAK card and Avanti Card.
-    // Two separate lines here are present because the card option is called differently in DAK and Avanti
-    "Captured 25 pdr Artillery": {
-        "Captured 25 pdr Artillery": 2,
-        "Command Card Captured 25 pdr Artillery": 2
     }
 }
