@@ -6,8 +6,7 @@ const adjustedPrices = _.merge(
     avanti,
     hungarianSteel,
     whiteDeath,
-    enemyAtTheGates,
-    redBanner,
+    soviets,
     fightingFirst,
     armouredFist)
 
