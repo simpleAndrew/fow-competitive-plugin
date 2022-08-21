@@ -169,6 +169,76 @@ const ghostPanzers = {
 
 }
 
+const namedGerman = {
+    "Armoured Car Company": {
+        "1x Sd Kfz 221 (MG)": 3,
+        "1x Sd Kfz 221 (MG) armoured car from (MG223)": 3,
+        "1x Luchs (2cm) tank from (MG258)": 4
+    },
+
+    "Captured 6 pdr Anti-tank (with 3 guns)": {
+        "Command Card Captured 6 pdr Anti-tank (with 3 guns)": -1
+    },
+    "Captured 6 pdr Anti-tank (with 2 guns)": {
+        "Command Card Captured 6 pdr Anti-tank (with 2 guns)": -1
+    },
+    "Armoured FlaK Half-tracks": {
+        "Armoured FlaK Half-tracks Command Card": 2
+    },
+    "StuG Company (RC)": {
+        "2x StuG (long 7.5cm)": 14
+    },
+    "Captured T-34 Platoon": {
+        "4x T-34 (76mm) from (MS137)": 29,
+        "3x T-34 (76mm) from (MS137)": 22,
+        "1x Panzer IV (late 7.5cm) from (MG236)<br>4x T-34 (76mm) from (MS137)": 38,
+        "1x Panzer IV (late 7.5cm) from (MG236)<br>3x T-34 (76mm) from (MS137)": 31,
+        "1x Panzer IV (late 7.5cm) from (MG236)<br>2x T-34 (76mm) from (MS137)": 24
+    },
+    "Fallschirmjäger Marder II (7.5cm) Tank-hunter Platoon": {
+        "4x Marder II (7.5cm)": 25,
+        "3x Marder II (7.5cm)": 19,
+        "2x Marder II (7.5cm)": 13
+    },
+    "Fallschirmjäger 8cm Mortar Platoon": {
+        "4x 8cm Stummel mortar": 6,
+        "3x 8cm Stummel mortar": 5,
+        "2x 8cm Stummel mortar": 3
+    },
+    "Fallschirmjäger 3.7cm Tank-hunter Platoon": {
+        "4x 3.7cm gun": 8,
+        "3x 3.7cm gun": 6,
+        "2x 3.7cm gun": 4,
+
+        "4x 3.7cm (Stielgranate) gun": 10,
+        "3x 3.7cm (Stielgranate) gun": 8,
+        "2x 3.7cm (Stielgranate) gun": 5,
+    },
+    "Fallschirmjäger 10.5cm Recoilless Battery": {
+        "4x 10.5cm recoilless gun": 12,
+        "2x 10.5cm recoilless gun": 6
+    },
+    "Fallschirmjäger 7.5cm Artillery Battery": {
+        "4x 7.5cm mountain gun": 10,
+        "2x 7.5cm mountain gun": 5
+    },
+    "Fallschirmjäger 7.5cm Tank-hunter Platoon": {
+        "4x 7.5cm gun": 21,
+        "3x 7.5cm gun": 16,
+        "2x 7.5cm gun": 11
+    },
+    "Fallschirmjäger 2cm Anti-aircraft Platoon": {
+        "4x 2cm anti-aircraft gun": 8,
+        "3x 2cm anti-aircraft gun": 6,
+        "2x 2cm anti-aircraft gun": 4
+    },
+    "Fallschirmjäger 5cm Tank-hunter Platoon": {
+        "4x 5cm gun": 14,
+        "3x 5cm gun": 11,
+        "2x 5cm gun": 7
+    }
+}
+
 const avanti = {
     "4x Autocannone (20mm)": 4,
     "2x Autocannone (20mm)": 2,
@@ -176,8 +246,8 @@ const avanti = {
     "3x Breda MG team<br>1x Breda HMG team<br>1x 20mm anti-tank rifle": 5,
     "2x Breda MG team<br>1x Breda HMG team<br>1x 20mm anti-tank rifle": 4,
 
-    "5x Breda MG & Carcano rifle team<br>2x Brixia mortar team<br>2x Flame-thrower team": 12,
-    "3x Breda MG & Carcano rifle team<br>1x Brixia mortar team<br>1x Flame-thrower team": 6,
+    "5x Breda MG &amp; Carcano rifle team<br>2x Brixia mortar team<br>2x Flame-thrower team": 12,
+    "3x Breda MG &amp; Carcano rifle team<br>3x Brixia mortar team<br>2x Flame-thrower team": 6,
 
     "5x L6/40 (20mm)": 7,
     "4x L6/40 (20mm)": 5,
@@ -190,6 +260,42 @@ const avanti = {
     "2x 100mm howitzer": 5,
 
 }
+
+const namedItalian = {
+
+    "Parachutist 47mm Anti-tank Platoon": {
+        "4x 47mm gun": 7,
+        "3x 47mm gun": 5,
+        "2x 47mm gun": 4
+    },
+    "47mm Anti-tank Platoon": {
+        "4x 47mm gun": 6,
+        "3x 47mm gun": 4,
+        "2x 47mm gun": 3
+    },
+
+    "Tactical Brilliance": {
+        "Command Card Tactical Brilliance": 3
+    },
+
+    "AB41 Armoured Car Company HQ": {
+        "2x AB41 (20mm) from (MI113)": 3
+    },
+
+    "L6/40 Scout Tank Company HQ": {
+        "4x L6/40 (20mm)": 7,
+        "3x L6/40 (20mm)": 5,
+        "2x L6/40 (20mm)": 4
+    },
+    "L6/40 Light Tank Company HQ": {
+        "4x L6/40 (20mm)": 7,
+        "3x L6/40 (20mm)": 5,
+        "2x L6/40 (20mm)": 4
+    }
+}
+
+const italianNamedFormationOverrides = {}
+const italianNumberedFormationOverrides = {}
 
 const whiteDeath = {
     "3x T-34 (76mm)": 21,
@@ -214,12 +320,10 @@ const namedWhiteDeath = {
     "105mm Howitzer Artillery Battery": {
         "4x 105mm howitzer": 10,
         "2x 105mm howitzer": 5,
-    },
-
+    }
 }
 
 const hungarianSteel = {
-
     "4x 40mm gun": 6,
     "2x 40mm gun": 3,
     "4x 40mm gun with Kerngranate": 8,
@@ -263,132 +367,18 @@ const namedHungarian = {
         "3x Csaba": 5
     }
 }
+
 const braveRomania = {
     "3x T-3 (7.5cm)": 18,
     "1x T-3 (7.5cm)": 6,
 
-    "3x T-4 (Long 7.5cm)": 21,
+    "3x T-4 (Long 7.5cm)": 20,
     "1x T-4 (Long 7.5cm)": 7,
 
     "3x 50mm gun": 9,
     "2x 50mm gun": 6,
 
     "2x AB (2cm)<br>1x AB (MG)": 3
-}
-
-const namedGerman = {
-    "Armoured Car Company": {
-        "1x Sd Kfz 221 (MG)": 3,
-        "1x Sd Kfz 221 (MG) armoured car from (MG223)": 3,
-        "1x Luchs (2cm) tank from (MG258)": 4
-    },
-
-    "Captured 6 pdr Anti-tank (with 3 guns)": {
-        "Command Card Captured 6 pdr Anti-tank (with 3 guns)": -1
-    },
-    "Captured 6 pdr Anti-tank (with 2 guns)": {
-        "Command Card Captured 6 pdr Anti-tank (with 2 guns)": -1
-    },
-    "Armoured FlaK Half-tracks": {
-        "Armoured FlaK Half-tracks Command Card": 2
-    },
-    "StuG Company (RC)": {
-        "2x StuG (long 7.5cm)": 14
-    },
-    "Captured T-34 Platoon": {
-        "4x T-34 (76mm) from (MS137)": 29,
-        "3x T-34 (76mm) from (MS137)": 22,
-        "1x Panzer IV (late 7.5cm) from (MG236)<br>4x T-34 (76mm) from (MS137)": 38,
-        "1x Panzer IV (late 7.5cm) from (MG236)<br>3x T-34 (76mm) from (MS137)": 31,
-        "1x Panzer IV (late 7.5cm) from (MG236)<br>2x T-34 (76mm) from (MS137)": 24
-    },
-    "Fallschirmjäger Marder II (7.5cm) Tank-hunter Platoon":{
-        "4x Marder II (7.5cm)": 25,
-        "3x Marder II (7.5cm)": 19,
-        "2x Marder II (7.5cm)": 13
-    },
-    "Fallschirmjäger 8cm Mortar Platoon": {
-        "4x 8cm Stummel mortar": 6,
-        "3x 8cm Stummel mortar": 5,
-        "2x 8cm Stummel mortar": 3
-    },
-    "Fallschirmjäger 3.7cm Tank-hunter Platoon": {
-        "4x 3.7cm gun": 8,
-        "3x 3.7cm gun": 6,
-        "2x 3.7cm gun": 4,
-
-        "4x 3.7cm (Stielgranate) gun": 10,
-        "3x 3.7cm (Stielgranate) gun": 8,
-        "2x 3.7cm (Stielgranate) gun": 5,
-    },
-    "Fallschirmjäger 10.5cm Recoilless Battery": {
-        "4x 10.5cm recoilless gun": 12,
-        "2x 10.5cm recoilless gun": 6
-    },
-    "Fallschirmjäger 7.5cm Artillery Battery": {
-        "4x 7.5cm mountain gun": 10,
-        "2x 7.5cm mountain gun": 5
-    },
-    "Fallschirmjäger 7.5cm Tank-hunter Platoon" : {
-        "4x 7.5cm gun": 21,
-        "3x 7.5cm gun": 16,
-        "2x 7.5cm gun": 11
-    },
-    "Fallschirmjäger 2cm Anti-aircraft Platoon": {
-        "4x 2cm anti-aircraft gun": 8,
-        "3x 2cm anti-aircraft gun": 6,
-        "2x 2cm anti-aircraft gun": 4
-    },
-    "Fallschirmjäger 5cm Tank-hunter Platoon": {
-        "4x 5cm gun": 14,
-        "3x 5cm gun": 11,
-        "2x 5cm gun": 7
-    }
-}
-
-const namedItalian = {
-
-    "Parachutist 47mm anti-tank platoon": {
-        "4x 47mm gun": 6,
-        "3x 47mm gun": 4,
-        "2x 47mm gun": 3
-    },
-    "47mm anti-tank platoon": {
-        "4x 47mm gun": 6,
-        "3x 47mm gun": 4,
-        "2x 47mm gun": 3
-    },
-
-    "Tactical Brilliance": {
-        "Command Card Tactical Brilliance": 3
-    },
-
-    "AB41 Armoured Car Company HQ": {
-        "2x AB41 (20mm) from (MI113)": 3
-    },
-
-    "L6/40 Scout Tank Company HQ": {
-        "4x L6/40 (20mm)": 7,
-        "3x L6/40 (20mm)": 6,
-        "2x L6/40 (20mm)": 5
-    },
-}
-
-//this one is for printing
-const italianNamedFormationOverrides = {
-    "L6/40 Light Tank Company Command Card": {
-        "L6/40 Light Tank Company HQ": {
-            "4x L6/40 (20mm)": 8,
-            "3x L6/40 (20mm)": 6,
-            "2x L6/40 (20mm)": 4
-        },
-
-        "L6/40 Light Tank Platoon": {
-            "5x L6/40 (20mm)": 8,
-            "4x L6/40 (20mm)": 6,
-            "3x L6/40 (20mm)": 5,
-        }
-    }
 }
 
 const hungarianNamedFormationOverrides = {
@@ -403,7 +393,7 @@ const hungarianNamedFormationOverrides = {
             "1x Panzer IV (short 7.5cm)": 6,
         }
     },
-    "T-38 Tank Company" : {
+    "T-38 Tank Company": {
         "Panzer III Tank Platoon": {
             "3x Panzer III (5cm)": 18,
             "2x Panzer III (5cm)": 12,
@@ -413,22 +403,6 @@ const hungarianNamedFormationOverrides = {
     }
 }
 
-//this one is for displaying of formation
-const italianNumberedFormationOverrides = {
-    "156": {
-        "L6/40 Light Tank Company HQ": {
-            "4x L6/40 (20mm)": 8,
-            "3x L6/40 (20mm)": 6,
-            "2x L6/40 (20mm)": 4
-        },
-
-        "L6/40 Light Tank Platoon": {
-            "5x L6/40 (20mm)": 8,
-            "4x L6/40 (20mm)": 6,
-            "3x L6/40 (20mm)": 5,
-        }
-    }
-}
 const hungarianNumberedFormationOverrides = {
     "536": {
         "Panzer III Tank Platoon": {
