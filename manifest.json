@@ -59,6 +59,18 @@
         "modules/printing/printing_taxonomy.js",
         "modules/printing/printing_init.js"
       ]
+    },
+    {
+      "matches": ["https://forces.flamesofwar.com/Home/SF*"],
+      "run_at": "document_end",
+      "js": [
+        "modules/common/lodash.js",
+        "modules/common/logging.js",
+        "modules/common/utils_setup.js",
+        "modules/common/ids_init.js",
+        "modules/storage/points_storage.js",
+        "modules/saved/saved_init.js"
+      ]
     }
   ],
   "icons": {
