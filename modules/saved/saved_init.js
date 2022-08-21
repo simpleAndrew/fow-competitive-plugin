@@ -1,3 +1,7 @@
+const selectLinkIDsExtractionRegex = /^https:\/\/.+?Index\/([\w-]+)\/(\d+)\/.*$/
+
+const deleteLinkIDsExtractionRegex = /^https:\/\/.+?GUIDID=([\w-]+)&.+$/
+
 initArmyPoints(_ => {
     adjustArmyPoints()
     setListeners()
@@ -7,12 +11,11 @@ function adjustArmyPoints() {
     log("Adjust Saved Army points")
     document.querySelectorAll(`td[class="rj"] + td > a`)
         .forEach(selectLink => {
-            let armyIdRegex = /^https:\/\/.+?Index\/([\w-]+)\/(\d+)\/.*$/
-            let parsedIds = armyIdRegex.exec(selectLink.href) || [];
+            let parsedIds = selectLinkIDsExtractionRegex.exec(selectLink.href) || [];
             const armyId = parsedIds[1]
             const formationId = parsedIds[2]
 
-            if (! isFormationSupported(formationId)) {
+            if (!isFormationSupported(formationId)) {
                 log(`Formation ${formationId} is not supported in for overrides`)
                 return
             }
@@ -31,4 +34,12 @@ function adjustArmyPoints() {
 
 function setListeners() {
     log("Setup listeners")
+    document.querySelectorAll(`td[class="rj"] + td + td + td > a`)
+        .forEach(deleteLink => {
+            deleteLink.addEventListener("click", _ => {
+                let armyId = deleteLinkIDsExtractionRegex.exec(deleteLink.href)[1]
+                clearArmyDelta(armyId)
+                log(`${armyId} stored points deleted`)
+            })
+        })
 }

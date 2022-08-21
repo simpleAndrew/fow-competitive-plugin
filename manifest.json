@@ -61,7 +61,7 @@
       ]
     },
     {
-      "matches": ["https://forces.flamesofwar.com/Home/SF"],
+      "matches": ["https://forces.flamesofwar.com/Home/SF*"],
       "run_at": "document_end",
       "js": [
         "modules/common/lodash.js",
