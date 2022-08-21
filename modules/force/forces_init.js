@@ -9,12 +9,12 @@ function overrideStoredFormationCosts() {
         let currentPoints = parseInt(pointsRegexp.exec(storedLink.textContent)[1])
         let parts = storedLink.href.split("/")
         let formation = parts[parts.length - 2] + "-" + parts[parts.length - 1]
-        let delta = formationDelta(formation)
+        let delta = formationDelta(formation, armyId)
         log("Points override: formation: " + formation)
         if (delta !== 0) {
             let overridenPoints = currentPoints + delta
             log("Overriding original points: " + currentPoints + "; overridden: " + overridenPoints)
-            storedLink.innerHTML = "Modify (" + overridenPoints + "<sup>*</sup> points)"
+            storedLink.innerHTML = `Modify (${overridenPoints}<sup>*</sup> points)`
         }
     });
 }

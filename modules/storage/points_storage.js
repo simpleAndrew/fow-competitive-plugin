@@ -15,7 +15,7 @@ function overrideUnitCost(node) {
 }
 
 function overrideFormationPoints(node) {
-    let delta = formationDelta(formationId)
+    let delta = formationDelta(formationId, armyId)
     log("Point override for formation " + formationId + ": " + delta)
     let originalPoints = parseInt(node.textContent.split(":")[1])
     if (delta !== 0) {
@@ -26,7 +26,7 @@ function overrideFormationPoints(node) {
 }
 
 function overrideArmyPoints(node) {
-    let delta = armyDelta()
+    let delta = armyDelta(armyId)
     log("Point override for army " + delta)
     let originalPoints = parseInt(node.textContent.split(":")[1])
     if (delta !== 0) {
@@ -36,18 +36,18 @@ function overrideArmyPoints(node) {
     }
 }
 
-function armyDelta() {
+function armyDelta(armId) {
     let delta = 0
-    for (const frmId of Object.keys(armyPoints[armyId] || {})) {
-        delta += formationDelta(frmId)
+    for (const frmId of Object.keys(armyPoints[armId] || {})) {
+        delta += formationDelta(frmId, armId)
     }
     return delta;
 }
 
-function formationDelta(frmId) {
-    let units = (armyPoints[armyId] || {})[frmId] || {}
+function formationDelta(frmId, armId) {
+    let units = (armyPoints[armId] || {})[frmId] || {}
     let delta = 0
-    for (unitData in units) {
+    for (let unitData in units) {
         delta += (units[unitData] || {})[points_field] || 0
     }
     return delta;
@@ -141,7 +141,7 @@ function initArmyPoints(callback) {
             log("Stored point values are read; army ID: " + armyId)
             armyPoints = storedArmyPoints
             callback()
-            logArmyPoints()
+            // logArmyPoints()
         }
     })
 }
