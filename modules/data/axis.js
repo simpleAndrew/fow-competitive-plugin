@@ -294,14 +294,7 @@ const namedItalian = {
     }
 }
 
-const namedFormationOverrides = {
-    //not used now, but could be of use in the future
-    //"<Formation Name>": {
-    //     "<Unit Name>": {
-    //             "<Unit Option>": 100
-    //     }
-    // }
-}
+
 
 
 const whiteDeath = {
@@ -417,6 +410,18 @@ const axisUnitCardOverrides = {
         "3x Panzer III (7.5cm)": 19,
         "2x Panzer III (7.5cm)": 13
     }
+}
+
+/**
+ * Overrides used to override point values on Force View (Printing) menu
+ */
+const namedFormationOverrides = {
+    //not used now since card ID override is enough, but could be of use in the future
+    //"<Formation Name>": {
+    //     "<Unit Name>": {
+    //             "<Unit Option>": 100
+    //     }
+    // }
 }
 
 /**
