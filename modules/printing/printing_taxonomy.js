@@ -112,8 +112,6 @@ function overrideOptionPoints(divContainer) {
 
 function overrideAddOnPoints(divContainer) {
     let container = divContainer.firstElementChild
-
-
     let originalHtml = container.innerHTML
 
     let factorParts = totalSelectedNumberRegex.exec(originalHtml)
@@ -123,8 +121,6 @@ function overrideAddOnPoints(divContainer) {
         return
     }
 
-
-
     let parsed = pointlessSelectedNumberRegex.exec(originalHtml.trim()) || [];
     let optionText = parsed[1]
     let selected = parsed[2]
@@ -132,9 +128,10 @@ function overrideAddOnPoints(divContainer) {
     if (selected) {
         let delta = getAdjustedOptionPoints(optionText)
         log(`Given delta: ${delta}`)
-        currentUnitDelta += delta * parseInt(selected)
-
-        container.innerHTML = `${originalHtml} ( ${writeAsPoints(delta)} each)`
+        if(delta !== undefined) {
+            currentUnitDelta += delta * parseInt(selected)
+            container.innerHTML = `${originalHtml} ( ${writeAsPoints(delta)} each)`
+        }
         return
     }
 
