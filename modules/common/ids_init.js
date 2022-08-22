@@ -64,7 +64,3 @@ function isFormationSupported(formation) {
         return false
     }
 }
-//
-// function writeAsPoints(adjustedOptionPoints) {
-//     return `${adjustedOptionPoints > 0 ? "+" : ""}${adjustedOptionPoints}<sup>*</sup> point${(adjustedOptionPoints === 1 || adjustedOptionPoints === -1) ? "" : "s"}`
-// }

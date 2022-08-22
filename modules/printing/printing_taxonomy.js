@@ -140,7 +140,7 @@ function overrideAddOnPoints(divContainer) {
 
 
     let parts = addonWithPointCostBuildInRegex.exec(originalHtml.trim())
-    if (!parts) {
+    if (parts) {
         let optionText = parts[1]
 
         let adjustedOptionPoints = getAdjustedOptionPoints(optionText);
@@ -158,7 +158,7 @@ function overrideAddOnPoints(divContainer) {
             let newPointsText = writeAsPoints(adjustedOptionPoints)
 
             container.innerHTML = originalHtml.replace(pointsText, newPointsText)
-            container.setAttribute("title", `"${pointsText}" by default`)
+            container.setAttribute("title", `${pointsText} by default`)
 
             let factor = parts[5] ? parseInt(parts[5]) : 1
 
@@ -183,7 +183,7 @@ function overrideUnitPoints() {
         let pointsDiv = currentUnitDiv.querySelector('div[class="cssUPts"]')
         let originalPoints = parseInt(pointsDiv.textContent)
         pointsDiv.innerHTML = (originalPoints + currentUnitDelta + currentCustomAddonPoints) + "<sup>*</sup>"
-        pointsDiv.setAttribute("title", originalPoints + " by default")
+        pointsDiv.setAttribute("title", `${originalPoints} by default`)
         log(`Original Unit Points: ${originalPoints}`)
     } else if (currentUnitDiv) {
         log("Unit handling done")
@@ -202,7 +202,7 @@ function overrideFormation() {
         let pointsDiv = currentFormation.querySelector('div[class="cssPts"]')
         let originalPoints = parseInt(pointsDiv.textContent)
         pointsDiv.innerHTML = (originalPoints + currentFormationDelta) + "<sup>*</sup>"
-        pointsDiv.setAttribute("title", originalPoints + " by default")
+        pointsDiv.setAttribute("title", `${originalPoints} by default`)
         log(`Original Formation Points: ${originalPoints}`)
     } else if (currentFormation) {
         log("Formation handling done")
@@ -218,8 +218,8 @@ function overrideArmy(div) {
     if (armyDelta !== 0) {
         let pointsDiv = div.lastChild
         let originalPoints = parseInt(pointsDiv.textContent.split(":")[1])
-        pointsDiv.innerHTML = "Total Points:" + (originalPoints + armyD) + "<sup>*</sup>"
-        pointsDiv.setAttribute("title", originalPoints + " by default")
+        pointsDiv.innerHTML = `Total Points: ${originalPoints + armyD}<sup>*</sup>`
+        pointsDiv.setAttribute("title", `${originalPoints} by default`)
         log(`Original Army Points: ${originalPoints}`)
         log("Army handling done")
         logStatLine()
