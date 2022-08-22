@@ -45,11 +45,10 @@ function overrideUnitOptionPoints() {
             return getAdjustedOptionPoints(originalText)
         }).forEach(div => {
         let originalText = div.textContent
-        let pointsParts = pointsRegexp.exec(originalText)
-        let parsedPoints = pointsParts[1]
-        let adjustedPrice = getAdjustedOptionPoints(originalText)
+        let pointsParts = pointsRegexp.exec(originalText) || []
 
-        let originalPoints = parseInt(pointsParts[2])
+        let adjustedPrice = getAdjustedOptionPoints(originalText)
+        let originalPoints = parseInt(pointsParts[2]) || 0
         let currentDelta = adjustedPrice - originalPoints
 
         if (currentDelta !== 0) {
@@ -59,14 +58,18 @@ function overrideUnitOptionPoints() {
             attr.value = `${currentDelta}`
             holder.attributes.setNamedItem(attr)
 
-            let pointsWord = "point" + (adjustedPrice === 1 || adjustedPrice === -1) ? "" : "s"
-            let sign = (adjustedPrice > 0 ? "+" : "")
-            let newPointsText = `${sign}${adjustedPrice}<sup>*</sup> ${pointsWord}`
+            let newPointsText = writeAsPoints(adjustedPrice)
 
-            let adjustedText = originalText.replace(parsedPoints, newPointsText)
             let newDescription = document.createElement('span');
-            newDescription.innerHTML = adjustedText;
-            newDescription.setAttribute("title", `${parsedPoints} by default`)
+            let pointsText = pointsParts[1]
+            newDescription.setAttribute("title", `${originalPoints} by default`)
+            if(pointsText) {
+                // means that points value is mentioned in the text of the card
+                newDescription.innerHTML = originalText.replace(pointsText, newPointsText)
+            } else {
+                // points value was not present
+                newDescription.innerHTML = `${originalText} (${newPointsText})`
+            }
             div.parentNode.replaceChild(newDescription, div)
         }
     })

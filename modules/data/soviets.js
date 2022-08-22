@@ -174,7 +174,4 @@ const namedSoviet = {
         "2x 76mm gun": 7
     },
 
-    "T-34/57": {
-        "Command Card T-34/57": 1
-    }
 }

@@ -8,6 +8,10 @@ let currentUnitDelta = 0
 let currentCustomAddonPoints = 0
 let armyD = 0
 
+const totalSelectedNumberRegex = /.*Total cards:\n&nbsp;\((\d+) selected\)/
+const pointlessSelectedNumberRegex = /^(.+?)\n&nbsp;\((\d+) selected.*?$/
+const addonWithPointCostBuildInRegex = /^(.+(([+-]\d+) points?).+?)(\n&nbsp;\((\d+) selected\).*)?$/
+
 function fixTheBrokenCards() {
     const fixes = {
         "Command Card Captured 6 pdr Anti-tank (with 3 guns)": -3,
@@ -38,7 +42,7 @@ function customiseAdjustedCards() {
         let cardOptionText = optionDiv.innerText
 
         //if this is actually originally pointless option that receives custom point values
-        if(optionDiv.className === "cssOpt" && overriddenOptions.indexOf(cardOptionText.trim()) !== -1) {
+        if (optionDiv.className === "cssOpt" && overriddenOptions.indexOf(cardOptionText.trim()) !== -1) {
             optionDiv.className = "cssOptL"
             let ptsValue = unitDiv.nextElementSibling.nextElementSibling.innerHTML
             let ptsContainer = document.createElement("div")
@@ -109,47 +113,60 @@ function overrideOptionPoints(divContainer) {
 function overrideAddOnPoints(divContainer) {
     let container = divContainer.firstElementChild
 
-    let addOnRegexp = /^(.+(([+-]\d+) points?).+?)(\n&nbsp;\((\d+) selected\).*)?$/
-    let originalHtml = container.innerHTML
-    let parts = addOnRegexp.exec(originalHtml.trim())
 
-    if (!parts) {
-        let cardsSelectedRegexp = /.*Total cards:\n&nbsp;\((\d+) selected\)/
-        let factorParts = cardsSelectedRegexp.exec(originalHtml)
-        if (factorParts) {
-            let unitFactor = parseInt(factorParts[1])
-            currentUnitDelta *= unitFactor
-        }
+    let originalHtml = container.innerHTML
+
+    let factorParts = totalSelectedNumberRegex.exec(originalHtml)
+    if (factorParts) {
+        let unitFactor = parseInt(factorParts[1])
+        currentUnitDelta *= unitFactor
         return
     }
 
-    let optionText = parts[1]
 
-    let adjustedOptionPoints = getAdjustedOptionPoints(optionText);
 
-    log(`Adjusted addon: ${optionText}; adjusted point cost: ${adjustedOptionPoints}`)
-    if (adjustedOptionPoints !== undefined && adjustedOptionPoints !== 0) {
-        let pointsText = parts[2]
-        let pointsVal = parts[3]
-        log(`Addon original points: ${pointsVal}`)
+    let parsed = pointlessSelectedNumberRegex.exec(originalHtml.trim()) || [];
+    let optionText = parsed[1]
+    let selected = parsed[2]
+    log(`Weird option override: ${optionText} -> selected ${selected}`)
+    if (selected) {
+        let delta = getAdjustedOptionPoints(optionText)
+        log(`Given delta: ${delta}`)
+        currentUnitDelta += delta * parseInt(selected)
 
-        let priceDelta = adjustedOptionPoints - parseInt(pointsVal)
+        container.innerHTML = `${originalHtml} ( ${writeAsPoints(delta)} each)`
+        return
+    }
 
-        log(`Addon points delta: ${priceDelta}`)
 
-        let newPointsText = (adjustedOptionPoints > 0 ? "+" : "")
-            + adjustedOptionPoints + "<sup>*</sup> point"
-            + ((adjustedOptionPoints === 1 || adjustedOptionPoints === -1) ? "" : "s")
+    let parts = addonWithPointCostBuildInRegex.exec(originalHtml.trim())
+    if (!parts) {
+        let optionText = parts[1]
 
-        container.innerHTML = originalHtml.replace(pointsText, newPointsText)
-        container.setAttribute("title", `"${pointsText}" by default`)
+        let adjustedOptionPoints = getAdjustedOptionPoints(optionText);
 
-        let factor = parts[5] ? parseInt(parts[5]) : 1
+        log(`Adjusted addon: ${optionText}; adjusted point cost: ${adjustedOptionPoints}`)
+        if (adjustedOptionPoints !== undefined && adjustedOptionPoints !== 0) {
+            let pointsText = parts[2]
+            let pointsVal = parts[3]
+            log(`Addon original points: ${pointsVal}`)
 
-        log(`Addons selected count: ${factor}`)
+            let priceDelta = adjustedOptionPoints - parseInt(pointsVal)
 
-        currentUnitDelta += priceDelta * factor
-        logStatLine()
+            log(`Addon points delta: ${priceDelta}`)
+
+            let newPointsText = writeAsPoints(adjustedOptionPoints)
+
+            container.innerHTML = originalHtml.replace(pointsText, newPointsText)
+            container.setAttribute("title", `"${pointsText}" by default`)
+
+            let factor = parts[5] ? parseInt(parts[5]) : 1
+
+            log(`Addons selected count: ${factor}`)
+
+            currentUnitDelta += priceDelta * factor
+            logStatLine()
+        }
     }
 }
 
@@ -162,7 +179,7 @@ function handleCustomAddonPoints(divContainer) {
 }
 
 function overrideUnitPoints() {
-    if (currentUnitDiv && (currentUnitDelta + currentCustomAddonPoints) !== 0 ) {
+    if (currentUnitDiv && (currentUnitDelta + currentCustomAddonPoints) !== 0) {
         let pointsDiv = currentUnitDiv.querySelector('div[class="cssUPts"]')
         let originalPoints = parseInt(pointsDiv.textContent)
         pointsDiv.innerHTML = (originalPoints + currentUnitDelta + currentCustomAddonPoints) + "<sup>*</sup>"
