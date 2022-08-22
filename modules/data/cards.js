@@ -19,6 +19,16 @@ const adjustedOptionPrices = {
 
     //hungarian pz4
     "Replace any or all Panzer IV (short 7.5cm) with Panzer IV (long 7.5cm) for +2 points each." : 1,
+
+    //red banner
+    "Total T-34 (76mm to replace with T-34/57:": -1,
+    "Total T-34 (76mm) to replace with T-34/57:": -1, //for potential future when they fix the typo
+
+    //enemy at the gates
+    "up to 10 Panzer III (short 5cm) (MG205)": -1,
+    "up to 7 Panzer IV (short 7.5cm) (MG202)": -1,
+    "up to 3 StuG (short 7.5cm) (MG221)": -1
+
 }
 
 const customSelectionOptions = {

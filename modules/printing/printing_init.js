@@ -45,7 +45,7 @@ function rewriteAllPrintable() {
 
         if (armyD !== 0) {
             let titleDiv = document.querySelector('div[class="cssTitle"]')
-            titleDiv.innerHTML += "<sup>*</sup> (Competitive Points)"
+            titleDiv.innerHTML += `<sup>*</sup> (Competitive Points ${pointsVersion})`
         }
     }
 }
