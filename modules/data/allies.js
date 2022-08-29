@@ -41,11 +41,14 @@ const fightingFirst = {
     "2x T30 (75mm)": 3,
     "4x 75mm pack howitzer": 8,
     "2x 75mm pack howitzer": 4,
-    "4x 105mm howitzer": 8,
-    "2x 105mm howitzer": 4
 }
 
 const namedFightingFirst = {
+    "105mm Field Artillery Battery": {
+        "4x 105mm howitzer": 8,
+        "2x 105mm howitzer": 4
+    },
+
     "M3A1 Armored Recon Company": {
         "2x M3A1 armoured car from (MU107)": 4
     }

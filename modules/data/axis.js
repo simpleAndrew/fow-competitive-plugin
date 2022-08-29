@@ -255,10 +255,6 @@ const avanti = {
 
     "4x AB41 (20mm)": 4,
     "3x AB41 (20mm)": 3,
-
-    "4x 100mm howitzer": 10,
-    "2x 100mm howitzer": 5,
-
 }
 
 const namedItalian = {
@@ -272,6 +268,10 @@ const namedItalian = {
         "4x 47mm gun": 6,
         "3x 47mm gun": 4,
         "2x 47mm gun": 3
+    },
+    "100mm Howitzer Battery": {
+        "4x 100mm howitzer": 10,
+        "2x 100mm howitzer": 5
     },
 
     "Tactical Brilliance": {
