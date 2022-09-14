@@ -3,9 +3,6 @@ const soviets = {
 }
 
 const namedSoviet = {
-    "BA-10 Armoured Car Platoon": {
-        "3x BA-10 (45mm)": 3
-    },
 
     "M3 Lee Tank Company": {
         "10x M3 Lee (short 75mm)": 40,
@@ -173,5 +170,39 @@ const namedSoviet = {
         "4x 76mm gun": 13,
         "2x 76mm gun": 7
     },
+}
 
+const sovietNamedFormationOverrides = {
+    "BA-10 Armoured Car Company Command Card": {
+        "BA-10 Armoured Car Platoon": {
+            "3x BA-10 (45mm)": 3
+        }
+    }
+}
+
+const sovietUnitCardOverrides = {
+    "MS128": {
+        "3x BA-10 (45mm)": 3
+    }
+}
+
+const sovietFormationIdOverrides = {
+    //Red Banner Formation Support
+    "194": {
+        "BA-10 Armoured Car Platoon": {
+            "3x BA-10 (45mm)": 3
+        }
+    },
+    //Command card
+    "214":{
+        "BA-10 Armoured Car Platoon": {
+            "3x BA-10 (45mm)": 3
+        }
+    },
+    //Enemy at the gates Formation Support
+    "129":{
+        "BA-10 Armoured Car Platoon": {
+            "3x BA-10 (45mm)": 3
+        }
+    }
 }

@@ -12,11 +12,11 @@ const adjustedPrices = _.merge(
 
 const namedUnitsOverrides = _.merge(namedSoviet, namedArmouredFist, namedGerman, namedFightingFirst, namedItalian, axisCommandCardOverrides, namedWhiteDeath, namedHungarian)
 
-const formationUnitOverrides = formationIdOverrides
+const formationUnitOverrides = _.merge(formationIdOverrides, sovietFormationIdOverrides)
 
-const formationNameUnitOverrides = namedFormationOverrides
+const formationNameUnitOverrides = _.merge(namedFormationOverrides, sovietNamedFormationOverrides)
 
-const unitCardOverrides = axisUnitCardOverrides
+const unitCardOverrides = _.merge(axisUnitCardOverrides, sovietUnitCardOverrides)
 
 function getOverriddenCards(unitCustomName = unitName) {
     return Object.keys(axisCommandCardOverrides[unitCustomName] || {});
