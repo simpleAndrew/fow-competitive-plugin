@@ -121,21 +121,6 @@ function overrideAddOnPoints(divContainer) {
         return
     }
 
-    let parsed = pointlessSelectedNumberRegex.exec(originalHtml.trim()) || [];
-    let optionText = parsed[1]
-    let selected = parsed[2]
-    log(`Weird option override: ${optionText} -> selected ${selected}`)
-    if (selected) {
-        let delta = getAdjustedOptionPoints(optionText)
-        log(`Given delta: ${delta}`)
-        if(delta !== undefined) {
-            currentUnitDelta += delta * parseInt(selected)
-            container.innerHTML = `${originalHtml} ( ${writeAsPoints(delta)} each)`
-        }
-        return
-    }
-
-
     let parts = addonWithPointCostBuildInRegex.exec(originalHtml.trim())
     if (parts) {
         let optionText = parts[1]
@@ -163,6 +148,20 @@ function overrideAddOnPoints(divContainer) {
 
             currentUnitDelta += priceDelta * factor
             logStatLine()
+            return
+        }
+    }
+
+    let parsed = pointlessSelectedNumberRegex.exec(originalHtml.trim()) || [];
+    let optionText = parsed[1]
+    let selected = parsed[2]
+    log(`Weird option override: ${optionText} -> selected ${selected}`)
+    if (selected) {
+        let delta = getAdjustedOptionPoints(optionText)
+        log(`Given delta: ${delta}`)
+        if(delta !== undefined) {
+            currentUnitDelta += delta * parseInt(selected)
+            container.innerHTML = `${originalHtml} ( ${writeAsPoints(delta)} each)`
         }
     }
 }
