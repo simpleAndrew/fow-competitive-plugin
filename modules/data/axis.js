@@ -332,8 +332,6 @@ const hungarianSteel = {
     "4x 50mm gun": 9,
     "2x 50mm gun": 4,
 
-    "4x 81mm mortar": 3,
-
     "4x Short 75mm gun": 10,
     "2x Short 75mm gun": 5,
 
@@ -361,7 +359,10 @@ const namedHungarian = {
     },
     "Motorised 81mm Mortar Platoon": {
         "4x 81mm mortar": 5,
-        "x 81mm mortar": 3
+        "2x 81mm mortar": 3
+    },
+    "81mm Mortar Platoon": {
+        "4x 81mm mortar": 3
     },
     "Csaba Armoured Car Company HQ": {
         "3x Csaba": 5
