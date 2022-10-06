@@ -264,16 +264,18 @@ const namedItalian = {
         "3x 47mm gun": 5,
         "2x 47mm gun": 4
     },
+    
+    "100mm Howitzer Battery": {
+        "4x 100mm howitzer": 10,
+        "2x 100mm howitzer": 5
+    },
+    
     "47mm Anti-tank Platoon": {
         "4x 47mm gun": 6,
         "3x 47mm gun": 4,
         "2x 47mm gun": 3
     },
-    "100mm Howitzer Battery": {
-        "4x 100mm howitzer": 10,
-        "2x 100mm howitzer": 5
-    },
-
+    
     "Tactical Brilliance": {
         "Command Card Tactical Brilliance": 3
     },
@@ -415,6 +417,11 @@ const axisUnitCardOverrides = {
         "2x Panzer III (5cm)": 12,
         "3x Panzer III (7.5cm)": 19,
         "2x Panzer III (7.5cm)": 13
+    },
+    "MI106": { // "47mm Anti-tank Platoon"
+        "4x 47mm gun": 6,
+        "3x 47mm gun": 4,
+        "2x 47mm gun": 3
     }
 }
 
