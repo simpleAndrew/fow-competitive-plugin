@@ -320,6 +320,11 @@ const namedWhiteDeath = {
     "105mm Howitzer Artillery Battery": {
         "4x 105mm howitzer": 10,
         "2x 105mm howitzer": 5,
+    },
+    "81mm Mortar Platoon": {
+        "3x 81mm mortar": 4,
+        "2x 81mm mortar": 3
+        
     }
 }
 
