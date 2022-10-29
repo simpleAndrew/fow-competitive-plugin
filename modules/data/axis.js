@@ -303,9 +303,6 @@ const whiteDeath = {
     "3x T-34 (76mm)": 21,
     "2x T-34 (76mm)": 14,
 
-    "3x 81mm mortar": 4,
-    "2x 81mm mortar": 3,
-
     "2x 37mm gun": 4,
     "2x 37mm gun (Stielgranate)": 5,
 
@@ -326,7 +323,6 @@ const namedWhiteDeath = {
     "81mm Mortar Platoon": {
         "3x 81mm mortar": 4,
         "2x 81mm mortar": 3
-        
     }
 }
 
@@ -422,6 +418,10 @@ const axisUnitCardOverrides = {
         "4x 47mm gun": 6,
         "3x 47mm gun": 4,
         "2x 47mm gun": 3
+    },
+    "MFI110": { //81mm Finish Mortars
+        "3x 81mm mortar": 4,
+        "2x 81mm mortar": 3
     }
 }
 
@@ -458,6 +458,12 @@ const formationIdOverrides = {
             "3x Panzer IV (short 7.5cm)": 18,
             "2x Panzer IV (short 7.5cm)": 12,
             "1x Panzer IV (short 7.5cm)": 6,
+        }
+    },
+    "534": {
+        "81mm Mortar Platoon": {
+            "3x 81mm mortar": 4,
+            "2x 81mm mortar": 3
         }
     }
 }
