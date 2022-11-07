@@ -447,6 +447,16 @@ const formationIdOverrides = {
             "2x Panzer III (5cm)": 12,
             "3x Panzer III (7.5cm)": 19,
             "2x Panzer III (7.5cm)": 13
+        },
+        "Panzer IV Tank Platoon": {
+            "3x Panzer IV (short 7.5cm)": 18,
+            "2x Panzer IV (short 7.5cm)": 12,
+        }
+    },
+    "535": {
+        "Panzer IV Tank Platoon": {
+            "3x Panzer IV (short 7.5cm)": 18,
+            "2x Panzer IV (short 7.5cm)": 12,
         }
     },
     "537": {
@@ -457,7 +467,6 @@ const formationIdOverrides = {
         "Panzer IV Tank Platoon": {
             "3x Panzer IV (short 7.5cm)": 18,
             "2x Panzer IV (short 7.5cm)": 12,
-            "1x Panzer IV (short 7.5cm)": 6,
         }
     },
     "534": {
